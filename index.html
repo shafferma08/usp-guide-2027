@@ -21,14 +21,13 @@
   .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
   .hdrwrap{max-width:1120px;margin:0 auto}
 
-  /* snapshot */
   .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:-26px auto 26px;
         max-width:1120px;padding:0 22px}
   .stat{background:#fff;border-radius:9px;padding:14px 16px;box-shadow:0 2px 8px rgba(16,42,82,.09)}
   .stat b{display:block;font-size:21px;color:var(--navy);line-height:1.2}
   .stat span{font-size:11.5px;color:var(--gray);display:block;margin-top:3px}
 
-  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
   nav.tabs button{border:1px solid var(--rule);background:#fff;color:var(--navy);padding:9px 16px;
        border-radius:7px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
   nav.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -40,13 +39,17 @@
   h2:first-child{margin-top:0}
   .sub{color:var(--gray);font-size:13.5px;margin:0 0 14px}
 
+  .grouphd{display:flex;align-items:baseline;gap:10px;margin:28px 0 4px;flex-wrap:wrap}
+  .grouphd:first-child{margin-top:0}
+  .grouphd h3{margin:0;font-size:17.5px;color:var(--navy)}
+  .grouphd .cnt{font-size:12.5px;color:var(--gray);font-weight:600}
+  .groupnote{font-size:13px;color:var(--gray);margin:0 0 14px}
+
   .card{background:#fff;border-radius:9px;padding:16px 18px;margin-bottom:12px;
         box-shadow:0 1px 4px rgba(16,42,82,.07);border-left:4px solid var(--rule)}
-  .card.ready{border-left-color:var(--green)}
-  .card.one{border-left-color:var(--amber)}
-  .card.two{border-left-color:var(--amber)}
-  .card.calc{border-left-color:var(--red)}
-  .card.three{border-left-color:#9aa6b5}
+  .card.g0{border-left-color:var(--green)}
+  .card.g1,.card.g2,.card.g3{border-left-color:var(--amber)}
+  .card.g4{border-left-color:var(--red)}
 
   .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
   .cname{font-weight:700;font-size:16.5px;color:var(--navy);margin:0}
@@ -56,36 +59,17 @@
   .p-need{background:var(--amberbg);color:var(--amber)}
   .p-calc{background:var(--redbg);color:var(--red)}
   .desc{font-size:13.5px;color:var(--gray);margin:9px 0 11px}
-  .reqs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px}
-  .chip{font-size:11.5px;padding:4px 9px;border-radius:5px;background:#eef2f7;color:var(--gray)}
-  .chip.got{background:var(--greenbg);color:var(--green);font-weight:600}
-  .chip.got::before{content:"✓ "}
-  .chip.miss{background:var(--amberbg);color:var(--amber);font-weight:600}
-  .chip.miss::before{content:"+ "}
+
+  .needbox{background:var(--amberbg);border-radius:6px;padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--amber)}
+  .needbox b{color:#8a5200}
+  .havebox{font-size:12.5px;color:var(--green);margin-bottom:11px}
+  .havebox b{color:var(--green)}
+
   .meta{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--gray);
         border-top:1px solid var(--rule);padding-top:10px}
   .meta b{color:var(--ink)}
   .meta a{color:var(--blue);text-decoration:none;font-weight:600}
   .meta a:hover{text-decoration:underline}
-
-  /* simulator */
-  .sim{background:#fff;border-radius:9px;padding:16px 18px;margin-bottom:18px;
-       box-shadow:0 1px 4px rgba(16,42,82,.07);border-left:4px solid var(--blue)}
-  .sim h3{margin:0 0 3px;font-size:15.5px;color:var(--navy)}
-  .sim p{margin:0 0 12px;font-size:13px;color:var(--gray)}
-  .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px}
-  .opts label{display:flex;align-items:center;gap:8px;font-size:13px;background:#f6f8fb;
-       padding:8px 11px;border-radius:6px;cursor:pointer;border:1px solid transparent}
-  .opts label:hover{border-color:var(--rule)}
-  .opts input{accent-color:var(--blue);width:15px;height:15px;flex-shrink:0}
-  .opts label.on{background:var(--light);border-color:var(--blue)}
-  .simout{margin-top:12px;font-size:13.5px;padding:10px 12px;background:var(--greenbg);
-          border-radius:6px;color:var(--green);font-weight:600}
-
-  .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .filters button{border:1px solid var(--rule);background:#fff;color:var(--gray);padding:7px 13px;
-       border-radius:20px;cursor:pointer;font-size:12.5px;font-weight:600;font-family:inherit}
-  .filters button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 
   table{width:100%;border-collapse:collapse;background:#fff;border-radius:9px;overflow:hidden;
         box-shadow:0 1px 4px rgba(16,42,82,.07);font-size:13.5px}
@@ -107,11 +91,13 @@
   .tl .ev::before{content:"";position:absolute;left:-27px;top:4px;width:11px;height:11px;
        border-radius:50%;background:var(--blue);border:2px solid #f4f6f9}
   .tl .ev.key::before{background:var(--orange)}
+  .tl .ev.done::before{background:var(--green)}
   .tl .d{font-weight:700;color:var(--navy);font-size:14px}
   .tl .t{font-size:13.5px;color:var(--gray)}
 
   .qbox{background:#fff;border-radius:9px;padding:16px 18px;box-shadow:0 1px 4px rgba(16,42,82,.07);
         margin-bottom:12px;border-left:4px solid var(--orange)}
+  .qbox.done{border-left-color:var(--green)}
   .qbox h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
   .qbox ol,.qbox ul{margin:0;padding-left:20px;font-size:13.5px;color:var(--gray)}
   .qbox li{margin-bottom:6px}
@@ -130,8 +116,8 @@
 
 <div class="snap">
   <div class="stat"><b>60</b><span>credits by December (54 done + 6 now)</span></div>
-  <div class="stat"><b>3.39</b><span>Your Santa Fe GPA · 3.13 all colleges</span></div>
-  <div class="stat"><b>Dec 2026</b><span>AA degree awarded</span></div>
+  <div class="stat"><b>3.39</b><span>your Santa Fe GPA · 3.13 all colleges</span></div>
+  <div class="stat"><b>Dec 2026</b><span>AA awarded · application filed</span></div>
   <div class="stat"><b>5</b><span>majors you can apply to today</span></div>
   <div class="stat"><b>Feb 1</b><span>earliest deadline (Summer 2027)</span></div>
 </div>
@@ -145,24 +131,13 @@
   <button data-tab="next">What To Do</button>
 </nav>
 
-<!-- ============ MAJORS ============ -->
 <section class="panel on" id="majors">
-
-  <div class="sim">
-    <h3>What if I take these in the spring?</h3>
-    <p>Check any classes you might take, and the list below updates to show what opens up.</p>
-    <div class="opts" id="opts"></div>
-    <div class="simout" id="simout"></div>
-  </div>
-
-  <div class="filters" id="filters"></div>
   <div id="list"></div>
 </section>
 
-<!-- ============ TRANSCRIPT ============ -->
 <section class="panel" id="transcript">
   <h2>What you have completed</h2>
-  <p class="sub">From your eSantaFe degree audit. "AP" means credit from a high school exam, which counts for the course but carries no letter grade.</p>
+  <p class="sub">From your eSantaFe degree audit. "P" means credit from an AP exam, which counts for the course but carries no letter grade.</p>
   <table>
     <thead><tr><th>Course</th><th>Title</th><th>Grade</th><th>When</th><th>Where</th></tr></thead>
     <tbody id="tbody"></tbody>
@@ -170,17 +145,22 @@
   <p class="note"><b>Why this matters:</b> the four courses doing the most work for you are Statistics, Macroeconomics, Microeconomics, and American Federal Government. That exact combination is what unlocks Urban Sciences and Planning, PPEL, and Criminology.</p>
 </section>
 
-<!-- ============ DATES ============ -->
 <section class="panel" id="dates">
   <h2>Dates that matter</h2>
   <p class="sub">Deadlines differ by college, so the one that applies depends on which major you pick.</p>
   <div class="tl" id="tl"></div>
 </section>
 
-<!-- ============ NEXT ============ -->
 <section class="panel" id="next">
   <h2>What to do</h2>
   <p class="sub">Short list, in order.</p>
+
+  <div class="qbox done">
+    <h4>Already done: AA graduation application filed ✓</h4>
+    <ul>
+      <li>Associate in Arts, Fall 2026. The degree posts in December, and Florida AA graduates get transfer priority at UF.</li>
+    </ul>
+  </div>
 
   <div class="qbox">
     <h4>1. This fall, the only thing that really matters</h4>
@@ -196,15 +176,17 @@
     <ul>
       <li><b>Urban Sciences:</b> <a href="mailto:vniblett@dcp.ufl.edu">vniblett@dcp.ufl.edu</a> — ask whether AP credit satisfies the macroeconomics and American Government prerequisites, and what would make you a stronger applicant.</li>
       <li><b>PPEL / Hamilton:</b> <a href="mailto:hamilton-advising@ufl.edu">hamilton-advising@ufl.edu</a> — same AP question, plus how competitive the applicant pool tends to be.</li>
-      <li><b>Liberal arts (Criminology, English):</b> they hold drop-in Zoom advising six times a week, no appointment needed. <a href="https://www.advising.ufl.edu/admissions/transfer-admissions/" target="_blank" rel="noopener">See the schedule</a>.</li>
+      <li><b>Liberal arts (Criminology, English):</b> drop-in Zoom advising six times a week, no appointment needed. <a href="https://www.advising.ufl.edu/admissions/transfer-admissions/" target="_blank" rel="noopener">See the schedule</a>.</li>
     </ul>
   </div>
 
   <div class="qbox">
     <h4>3. Picking spring classes in November</h4>
     <ul>
-      <li>Taking <b>US History since 1877</b> and <b>Public Speaking</b> keeps the widest set of doors open, with no math involved.</li>
-      <li>Taking <b>Survey of Calculus</b> is the only way to reach Business, Economics, or Food and Resource Economics. It is not needed for anything else on this list.</li>
+      <li>If you're aiming at Urban Sciences, PPEL, Criminology or English, you don't need anything specific. Pick classes that keep you at three or four total.</li>
+      <li><b>US History since 1877</b> is the single highest-value elective. It's the only thing standing between you and all four journalism majors.</li>
+      <li><b>Public Speaking</b> counts as an approved elective inside the Urban Sciences degree, so it does double duty.</li>
+      <li><b>Survey of Calculus</b> is the only way to reach Business, Economics, or Food and Resource Economics. It isn't needed for anything else on this list.</li>
       <li>Three or four classes keeps your Pell Grant money up. Two classes cuts it roughly in half.</li>
     </ul>
   </div>
@@ -232,7 +214,7 @@ const TRANSCRIPT = [
   ["WOH 2022","World History 2","P","Summer 2023","AP exam"],
   ["LIT 2000","Literature Appreciation","P","Spring 2024","AP exam"],
   ["AML 2020","Survey of American Literature 2","P","Spring 2024","AP exam"],
-  ["HSS 9001C","Humanities/Social Science","P","Spring 2024","AP exam"],
+  ["HSS 9001C","Humanities / Social Science","P","Spring 2024","AP exam"],
   ["ENC 1101","College Composition 1","C","Fall 2024","St. Petersburg College"],
   ["ENC 1102","College Composition 2","C","Spring 2025","St. Petersburg College"],
   ["POS 2041","American Federal Government","P","Spring 2025","AP exam"],
@@ -252,7 +234,7 @@ const TRANSCRIPT = [
 ];
 const tb = document.getElementById('tbody');
 TRANSCRIPT.forEach(r=>{
-  let cls = 'gP';
+  let cls='gP';
   if(r[2]==='A') cls='gA';
   else if(r[2][0]==='B') cls='gB';
   else if(r[2]==='C') cls='gC';
@@ -261,232 +243,184 @@ TRANSCRIPT.forEach(r=>{
     `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><span class="g ${cls}">${r[2]}</span></td><td>${r[3]}</td><td>${r[4]}</td></tr>`);
 });
 
-/* ---------- spring course options ---------- */
-const OPTIONS = [
-  {id:'amh',  label:'US History since 1877 (AMH 2020)'},
-  {id:'spc',  label:'Public Speaking (SPC 2608)'},
-  {id:'calc', label:'Survey of Calculus (MAC 2233)'},
-  {id:'psy',  label:'General Psychology (PSY 2012)'},
-  {id:'syg',  label:'Intro to Sociology + 1 more sociology'},
-  {id:'pol',  label:'2 political science courses'},
-  {id:'ant',  label:'2 anthropology courses'},
-  {id:'hist', label:'1 more history course'},
-  {id:'geo',  label:'1 geography course'},
-  {id:'rel',  label:'2 religion courses'},
-  {id:'phi',  label:'2 philosophy courses'},
-  {id:'pre',  label:'Precalculus (MAC 1147)'},
-  {id:'edu3', label:'3 intro education courses'}
+/* ---------- groups ---------- */
+const GROUPS = [
+  {g:0, h:"Ready to apply now",         note:"Nothing more to take. You already meet every course requirement for these.", pill:"READY NOW", pc:"p-ready"},
+  {g:1, h:"One more class",             note:"A single course opens each of these.", pill:"1 CLASS", pc:"p-need"},
+  {g:2, h:"Two more classes",           note:"Doable in one spring semester if any of these interest you.", pill:"2 CLASSES", pc:"p-need"},
+  {g:3, h:"Three more classes",         note:"A bigger lift, listed so you know they exist.", pill:"3 CLASSES", pc:"p-need"},
+  {g:4, h:"Requires Survey of Calculus", note:"The business and economics track. Calculus is the only thing missing from all four.", pill:"NEEDS CALCULUS", pc:"p-calc"}
 ];
 
-/* ---------- majors ---------- */
 const MAJORS = [
-  {
-    n:"Urban Sciences and Planning", c:"College of Design, Construction and Planning",
-    d:"Economics, policy, governance and data analysis applied to cities. Careers in city planning and urban data analytics. There's also a 4+1 option to add a master's in a fifth year.",
-    has:["Statistics","Macroeconomics","Microeconomics","American Federal Government"], need:[], req:[],
-    gpa:"3.0 overall", dl:"Summer: Feb 1 · Fall: May 1 · no spring intake",
-    link:"https://dcp.ufl.edu/admissions/busp/", contact:"vniblett@dcp.ufl.edu", star:true
-  },
-  {
-    n:"Philosophy, Politics, Economics and Law (PPEL)", c:"Hamilton School",
-    d:"Economics, government, philosophy and legal reasoning combined. A common pre-law path and a strong fit for your economics and accounting background.",
-    has:["Macroeconomics","Microeconomics","Statistics"], need:[], req:[],
-    gpa:"3.0 overall, 2.5 in the three courses", dl:"Follows UF transfer dates · Fall: May 1",
-    link:"https://hamilton.center.ufl.edu/admissions-requirements/", contact:"hamilton-advising@ufl.edu", star:true,
-    warn:"Pool-based admission, meaning qualified applicants compete for a limited number of spots."
-  },
-  {
-    n:"Criminology", c:"Liberal Arts and Sciences",
-    d:"Law, crime and the justice system. Leads to law school, courts, law enforcement, or policy research.",
-    has:["Statistics","Macroeconomics","Microeconomics","American Federal Government"], need:[], req:[],
-    gpa:"3.0 overall, 2.75 in those courses", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"English", c:"Liberal Arts and Sciences",
-    d:"Literature and writing. Your two AP literature credits satisfy the entire requirement.",
-    has:["Literature Appreciation (AP)","American Literature (AP)"], need:[], req:[],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Emergency Services", c:"Design, Construction and Planning (online)",
-    d:"Online degree for emergency management and fire service leadership. No course prerequisites at all.",
-    has:["No prerequisites required"], need:[], req:[],
-    gpa:"2.3 overall", dl:"Follows UF Online dates",
-    link:"https://dcp.ufl.edu/rinker/academics/online/fire-and-emergency-services/", contact:"kcollins@dcp.ufl.edu"
-  },
-  {
-    n:"Advertising", c:"Journalism and Communications",
-    d:"Brand strategy, consumer research, campaigns. The most business-adjacent option in the journalism college, and your accounting and computing courses satisfy a quantitative option there.",
-    has:["Statistics","Microeconomics"], need:["US History since 1877"], req:['amh'],
-    gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
-    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"
-  },
-  {
-    n:"Public Relations", c:"Journalism and Communications",
-    d:"Communications strategy, media relations, crisis and reputation management.",
-    has:["Statistics","Microeconomics"], need:["US History since 1877"], req:['amh'],
-    gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
-    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"
-  },
-  {
-    n:"Journalism", c:"Journalism and Communications",
-    d:"Reporting and news writing across print, digital and broadcast.",
-    has:["Statistics"], need:["US History since 1877"], req:['amh'],
-    gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
-    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"
-  },
-  {
-    n:"Media Production, Management and Technology", c:"Journalism and Communications",
-    d:"The production and business side of media, including management and technology.",
-    has:["Statistics"], need:["US History since 1877"], req:['amh'],
-    gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
-    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"
-  },
-  {
-    n:"History", c:"Liberal Arts and Sciences",
-    d:"Your AP World History counts as one of the two required history courses.",
-    has:["World History 2 (AP)"], need:["1 more history course"], req:['hist'],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Geography", c:"Liberal Arts and Sciences",
-    d:"Your statistics credit covers half the requirement. Includes mapping and spatial analysis, which overlaps with urban planning.",
-    has:["Statistics"], need:["1 geography course"], req:['geo'],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Political Science", c:"Liberal Arts and Sciences",
-    d:"Government, policy and political institutions. Another common pre-law route.",
-    has:["Statistics","American Federal Government"], need:["2 more political science courses"], req:['pol'],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Sociology", c:"Liberal Arts and Sciences",
-    d:"Social structures, institutions and inequality.",
-    has:["Statistics"], need:["Intro to Sociology + 1 more"], req:['syg'],
-    gpa:"2.5 overall, 2.75 in those courses", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Anthropology", c:"Liberal Arts and Sciences",
-    d:"Human culture and society. Your statistics credit covers part of the requirement.",
-    has:["Statistics"], need:["2 anthropology courses"], req:['ant'],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Religion", c:"Liberal Arts and Sciences",
-    d:"Comparative study of world religions. A 30-credit major with no math or language requirement.",
-    has:[], need:["2 religion courses"], req:['rel'],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Philosophy", c:"Liberal Arts and Sciences",
-    d:"Logic, ethics and reasoning. Strong preparation for law school.",
-    has:[], need:["2 philosophy courses"], req:['phi'],
-    gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Sustainability and the Built Environment", c:"Design, Construction and Planning",
-    d:"Sustainable development and planning. Closely related to Urban Sciences.",
-    has:["Statistics","Economics"], need:["Precalculus (MAC 1147)"], req:['pre'],
-    gpa:"3.0 overall", dl:"Summer: Feb 1 · Fall: May 1",
-    link:"https://dcp.ufl.edu/admissions/sbe-advising/", contact:"advising@dcp.ufl.edu"
-  },
-  {
-    n:"Business Administration (BSBA)", c:"Warrington College of Business, Gainesville campus",
-    d:"Finance, Management, Marketing or Information Systems. The original goal, and the hardest door.",
-    has:["Macroeconomics","Microeconomics","Statistics","Computing","Financial Accounting","Managerial Accounting"],
-    need:["Survey of Calculus"], req:['calc'],
-    gpa:"3.5 in the seven prerequisites, all attempts counted", dl:"Fall: May 1 · no summer intake",
-    link:"https://warrington.ufl.edu/admissions-aid/undergraduate-admissions/", contact:"admissions@warrington.ufl.edu",
-    warn:"Your prerequisite average is currently 3.47 against a 3.5 requirement, so fall grades decide this one."
-  },
-  {
-    n:"Business Administration (BSBA), Online", c:"Warrington College of Business, UF Online",
-    d:"The same UF business degree taken online, about 25% cheaper. The diploma reads University of Florida.",
-    has:["Macroeconomics","Microeconomics","Statistics","Computing","Financial Accounting","Managerial Accounting"],
-    need:["Survey of Calculus"], req:['calc'],
-    gpa:"2.5 in the seven prerequisites", dl:"Summer: Jan 25 · Fall: around May 11",
-    link:"https://warrington.ufl.edu/undergraduate-academics/online-business-program/admissions/", contact:"admissions@warrington.ufl.edu"
-  },
-  {
-    n:"Economics", c:"Liberal Arts and Sciences",
-    d:"The quantitative social science behind business, policy and finance.",
-    has:["Macroeconomics","Microeconomics","Statistics"], need:["Survey of Calculus"], req:['calc'],
-    gpa:"3.0 overall and 3.0 in those four courses", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
-    link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"
-  },
-  {
-    n:"Food and Resource Economics", c:"Agricultural and Life Sciences",
-    d:"UF's agribusiness and applied economics degree. Your accounting sequence is a direct hit, and the GPA bar is the lowest of any business-track option.",
-    has:["Financial Accounting","Macroeconomics","Statistics"], need:["Survey of Calculus"], req:['calc'],
-    gpa:"2.0 overall and 2.0 in those courses, C or better in each", dl:"Fall: May 1 · Summer: Feb 15",
-    link:"https://cals.ufl.edu/content/PDF/Transfer_Guide.pdf", contact:"jdolder@ufl.edu"
-  },
-  {
-    n:"Education Sciences", c:"College of Education",
-    d:"Education without classroom teaching certification. Leads to policy, training, ed tech and nonprofit work. No state teaching exam required.",
-    has:[], need:["3 education courses"], req:['edu3'],
-    gpa:"2.0 overall", dl:"Fall: May 1 · Spring: Sept 15",
-    link:"https://education.ufl.edu/future-edugators/", contact:"studenthelp@coe.ufl.edu"
-  }
+  {g:0, star:true, n:"Urban Sciences and Planning", c:"College of Design, Construction and Planning",
+   d:"Economics, policy, governance and data analysis applied to cities. Careers in city planning and urban data analytics. There's also a 4+1 option to add a master's in a fifth year.",
+   have:"Statistics, Macroeconomics, Microeconomics, American Federal Government",
+   gpa:"3.0 overall", dl:"Summer: Feb 1 · Fall: May 1 · no spring intake",
+   link:"https://dcp.ufl.edu/admissions/busp/", contact:"vniblett@dcp.ufl.edu"},
+
+  {g:0, star:true, n:"Philosophy, Politics, Economics and Law (PPEL)", c:"Hamilton School",
+   d:"Economics, government, philosophy and legal reasoning combined. A common pre-law path and a strong fit for your economics and accounting background.",
+   have:"Macroeconomics, Microeconomics, Statistics",
+   gpa:"3.0 overall, 2.5 in those three courses", dl:"Fall: May 1",
+   link:"https://hamilton.center.ufl.edu/admissions-requirements/", contact:"hamilton-advising@ufl.edu",
+   warn:"Pool-based admission, meaning qualified applicants compete for a limited number of spots."},
+
+  {g:0, n:"Criminology", c:"Liberal Arts and Sciences",
+   d:"Law, crime and the justice system. Leads to law school, courts, law enforcement, or policy research.",
+   have:"Statistics, plus Macroeconomics, Microeconomics and American Federal Government from the approved list",
+   gpa:"3.0 overall, 2.75 in those courses", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:0, n:"English", c:"Liberal Arts and Sciences",
+   d:"Literature and writing. Your two AP literature credits satisfy the entire requirement.",
+   have:"Literature Appreciation and American Literature, both from AP",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:0, n:"Emergency Services", c:"Design, Construction and Planning (online)",
+   d:"Online degree for emergency management and fire service leadership. Listed because it has no course prerequisites at all, though it's a narrow field.",
+   have:"No prerequisites required",
+   gpa:"2.3 overall", dl:"Follows UF Online dates",
+   link:"https://dcp.ufl.edu/rinker/academics/online/fire-and-emergency-services/", contact:"kcollins@dcp.ufl.edu"},
+
+  {g:1, n:"Advertising", c:"Journalism and Communications",
+   d:"Brand strategy, consumer research and campaigns. The most business-adjacent option in the journalism college, and your accounting and computing courses satisfy a quantitative option there.",
+   have:"Statistics, Microeconomics", needs:"US History since 1877 (AMH 2020). Your AP World History does not substitute.",
+   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
+
+  {g:1, n:"Public Relations", c:"Journalism and Communications",
+   d:"Communications strategy, media relations, crisis and reputation management.",
+   have:"Statistics, Microeconomics", needs:"US History since 1877 (AMH 2020)",
+   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
+
+  {g:1, n:"Journalism", c:"Journalism and Communications",
+   d:"Reporting and news writing across print, digital and broadcast.",
+   have:"Statistics", needs:"US History since 1877 (AMH 2020)",
+   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
+
+  {g:1, n:"Media Production, Management and Technology", c:"Journalism and Communications",
+   d:"The production and business side of media, including management and technology.",
+   have:"Statistics", needs:"US History since 1877 (AMH 2020)",
+   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
+
+  {g:1, n:"History", c:"Liberal Arts and Sciences",
+   d:"Your AP World History already counts as one of the two required history courses.",
+   have:"World History 2 (AP)", needs:"One more history course, any 2000 level or above",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:1, n:"Geography", c:"Liberal Arts and Sciences",
+   d:"Includes mapping and spatial analysis, which overlaps with urban planning. Your statistics credit covers half the requirement.",
+   have:"Statistics", needs:"One geography course (GEA 1000 is not accepted)",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:2, n:"Political Science", c:"Liberal Arts and Sciences",
+   d:"Government, policy and political institutions. Another common pre-law route.",
+   have:"Statistics, American Federal Government",
+   needs:"Two more from: Comparative Politics (CPO 2001), International Relations (INR 2001), Political Theory (POT 2002)",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:2, n:"Sociology", c:"Liberal Arts and Sciences",
+   d:"Social structures, institutions and inequality.",
+   have:"Statistics", needs:"Two sociology courses. Intro to Sociology (SYG 2000) is strongly recommended as one of them.",
+   gpa:"2.5 overall, 2.75 in those courses", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:2, n:"Anthropology", c:"Liberal Arts and Sciences",
+   d:"Human culture and society. Your statistics credit covers part of the requirement.",
+   have:"Statistics", needs:"Two anthropology courses",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:2, n:"Religion", c:"Liberal Arts and Sciences",
+   d:"Comparative study of world religions. A 30-credit major with no math or language requirement.",
+   have:"Nothing yet", needs:"Two religion courses, any level",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:2, n:"Philosophy", c:"Liberal Arts and Sciences",
+   d:"Logic, ethics and reasoning. Strong preparation for law school.",
+   have:"Nothing yet", needs:"Two philosophy courses, for example Intro to Philosophy and Logic",
+   gpa:"2.5 overall", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:2, n:"Sustainability and the Built Environment", c:"Design, Construction and Planning",
+   d:"Sustainable development and planning. Closely related to Urban Sciences.",
+   have:"Statistics, Economics", needs:"Precalculus (MAC 1147, or MAC 1140 plus MAC 1114)",
+   gpa:"3.0 overall", dl:"Summer: Feb 1 · Fall: May 1",
+   link:"https://dcp.ufl.edu/admissions/sbe-advising/", contact:"advising@dcp.ufl.edu"},
+
+  {g:3, n:"Education Sciences", c:"College of Education",
+   d:"Education without classroom teaching certification. Leads to policy, training, ed tech and nonprofit work. No state teaching exam required.",
+   have:"Nothing yet", needs:"Three intro education courses: EDF 1005, EDF 2085 or EEX 2000, and EME 2040",
+   gpa:"2.0 overall", dl:"Fall: May 1 · Spring: Sept 15",
+   link:"https://education.ufl.edu/future-edugators/", contact:"studenthelp@coe.ufl.edu"},
+
+  {g:3, n:"Sport Management", c:"Health and Human Performance",
+   d:"Management, marketing, finance and law applied to sport organizations. A business degree in practice.",
+   have:"Economics, College Algebra, Statistics",
+   needs:"General Psychology (PSY 2012), Principles of Marketing, Principles of Management",
+   gpa:"2.2 minimum, though competitive applicants are near 3.5", dl:"Fall: May 1 · Spring: Sept 15",
+   link:"https://hhp.ufl.edu/admissions/transfer-to-hhp/", contact:"SPMundergrad@hhp.ufl.edu",
+   warn:"Marketing and Management may count as upper-division business courses, which can disqualify you from the Warrington business school. Ask an advisor before taking both."},
+
+  {g:4, n:"Business Administration (BSBA)", c:"Warrington College of Business, Gainesville campus",
+   d:"Finance, Management, Marketing or Information Systems. The original goal, and the hardest door.",
+   have:"Macroeconomics, Microeconomics, Statistics, Computing, Financial Accounting, Managerial Accounting. Six of seven.",
+   needs:"Survey of Calculus (MAC 2233)",
+   gpa:"3.5 across the seven prerequisites, every attempt counted", dl:"Fall: May 1 · no summer intake",
+   link:"https://warrington.ufl.edu/admissions-aid/undergraduate-admissions/", contact:"admissions@warrington.ufl.edu",
+   warn:"Your prerequisite average is currently 3.47 against a 3.5 requirement, so fall grades decide this one."},
+
+  {g:4, n:"Business Administration (BSBA), Online", c:"Warrington College of Business, UF Online",
+   d:"The same UF business degree taken online, about 25% cheaper. The diploma reads University of Florida.",
+   have:"Six of the seven prerequisites",
+   needs:"Survey of Calculus (MAC 2233)",
+   gpa:"2.5 across the seven prerequisites, which you already clear", dl:"Summer: Jan 25 · Fall: around May 11",
+   link:"https://warrington.ufl.edu/undergraduate-academics/online-business-program/admissions/", contact:"admissions@warrington.ufl.edu"},
+
+  {g:4, n:"Economics", c:"Liberal Arts and Sciences",
+   d:"The quantitative social science behind business, policy and finance.",
+   have:"Macroeconomics, Microeconomics, Statistics",
+   needs:"Survey of Calculus (MAC 2233)",
+   gpa:"3.0 overall and 3.0 across those four courses", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://www.advising.ufl.edu/admissions/transfer-admissions/", contact:"clastransfer@advising.ufl.edu"},
+
+  {g:4, n:"Food and Resource Economics", c:"Agricultural and Life Sciences",
+   d:"UF's agribusiness and applied economics degree. Your accounting sequence is a direct hit, and the GPA bar is the lowest of any business-track option.",
+   have:"Financial Accounting, Macroeconomics, Statistics",
+   needs:"Survey of Calculus (MAC 2233)",
+   gpa:"2.0 overall and 2.0 in those courses, C or better in each", dl:"Fall: May 1 · Summer: Feb 15",
+   link:"https://cals.ufl.edu/content/PDF/Transfer_Guide.pdf", contact:"jdolder@ufl.edu"}
 ];
 
-/* build option checkboxes */
-const optWrap = document.getElementById('opts');
-OPTIONS.forEach(o=>{
-  optWrap.insertAdjacentHTML('beforeend',
-    `<label id="lb-${o.id}"><input type="checkbox" data-o="${o.id}"><span>${o.label}</span></label>`);
-});
-
-let picked = new Set();
-let filter = 'all';
-
-function statusOf(m){
-  const unmet = m.req.filter(r=>!picked.has(r));
-  if(m.req.length===0) return {k:'ready', label:'READY NOW', cls:'p-ready'};
-  if(unmet.length===0) return {k:'unlocked', label:'UNLOCKED', cls:'p-ready'};
-  if(m.req.includes('calc')) return {k:'calc', label:'NEEDS CALCULUS', cls:'p-calc'};
-  const t = (m.need[0]||'');
-  const n = t.startsWith('3') ? '3 MORE CLASSES' : t.startsWith('2') ? '2 MORE CLASSES' : '1 MORE CLASS';
-  return {k:'need', label:n, cls:'p-need'};
-}
-
-function render(){
-  const list = document.getElementById('list');
-  list.innerHTML='';
-  let shown=0;
-  MAJORS.forEach(m=>{
-    const st = statusOf(m);
-    if(filter==='ready' && !(st.k==='ready'||st.k==='unlocked')) return;
-    if(filter==='nocalc' && m.req.includes('calc')) return;
-    if(filter==='calc' && !m.req.includes('calc')) return;
-    shown++;
-    const cardCls = (st.k==='ready'||st.k==='unlocked') ? 'ready' : (m.req.includes('calc') ? 'calc' : 'one');
-    const chips = m.has.map(h=>`<span class="chip got">${h}</span>`).join('') +
-      m.need.map((nd,i)=>{
-        const done = picked.has(m.req[i]);
-        return `<span class="chip ${done?'got':'miss'}">${nd}</span>`;
-      }).join('');
+const list = document.getElementById('list');
+GROUPS.forEach(grp=>{
+  const items = MAJORS.filter(m=>m.g===grp.g);
+  if(!items.length) return;
+  list.insertAdjacentHTML('beforeend',
+    `<div class="grouphd"><h3>${grp.h}</h3><span class="cnt">${items.length} major${items.length>1?'s':''}</span></div>
+     <p class="groupnote">${grp.note}</p>`);
+  items.forEach(m=>{
     list.insertAdjacentHTML('beforeend',`
-      <div class="card ${cardCls}">
+      <div class="card g${m.g}">
         <div class="ctop">
           <div>
             <p class="cname">${m.star?'★ ':''}${m.n}</p>
             <p class="ccol">${m.c}</p>
           </div>
-          <span class="pill ${st.cls}">${st.label}</span>
+          <span class="pill ${grp.pc}">${grp.pill}</span>
         </div>
         <p class="desc">${m.d}</p>
-        <div class="reqs">${chips}</div>
+        ${m.needs?`<div class="needbox"><b>Still need:</b> ${m.needs}</div>`:''}
+        <p class="havebox"><b>✓ You already have:</b> ${m.have}</p>
         ${m.warn?`<p class="desc" style="color:var(--amber)"><b>Note:</b> ${m.warn}</p>`:''}
         <div class="meta">
           <span><b>GPA:</b> ${m.gpa}</span>
@@ -496,38 +430,6 @@ function render(){
         </div>
       </div>`);
   });
-  if(!shown) list.innerHTML='<div class="card"><p class="desc">Nothing matches that filter.</p></div>';
-
-  const ready = MAJORS.filter(m=>{const s=statusOf(m);return s.k==='ready'||s.k==='unlocked';}).length;
-  const base  = MAJORS.filter(m=>m.req.length===0).length;
-  const out = document.getElementById('simout');
-  if(picked.size===0){
-    out.textContent = `With what you have right now: ${base} majors you can apply to.`;
-  } else {
-    out.textContent = `With those classes added: ${ready} majors open, up from ${base}.`;
-  }
-}
-
-optWrap.addEventListener('change',e=>{
-  const id = e.target.dataset.o;
-  if(!id) return;
-  const lb = document.getElementById('lb-'+id);
-  if(e.target.checked){picked.add(id);lb.classList.add('on');}
-  else {picked.delete(id);lb.classList.remove('on');}
-  render();
-});
-
-/* filters */
-const FILTERS=[['all','Everything'],['ready','Ready now'],['nocalc','No calculus needed'],['calc','Needs calculus']];
-const fw=document.getElementById('filters');
-FILTERS.forEach(([k,l])=>{
-  fw.insertAdjacentHTML('beforeend',`<button data-f="${k}" class="${k==='all'?'on':''}">${l}</button>`);
-});
-fw.addEventListener('click',e=>{
-  const f=e.target.dataset.f; if(!f) return;
-  filter=f;
-  [...fw.children].forEach(b=>b.classList.toggle('on',b.dataset.f===f));
-  render();
 });
 
 /* tabs */
@@ -539,25 +441,23 @@ document.querySelector('nav.tabs').addEventListener('click',e=>{
 
 /* timeline */
 const TL=[
-  ["Now","File the AA graduation application in eSantaFe. Records → Graduation. Degree: Associate in Arts, Term: Fall 2026.",true],
-  ["Aug 17, 2026","Fall classes start. College Algebra and Managerial Accounting.",false],
-  ["November 2026","Register for spring. Pick classes based on which majors he's aiming at.",false],
-  ["December 2026","AA degree awarded. Florida AA graduates get transfer priority at UF.",true],
-  ["Jan 25, 2027","UF Online summer application deadline.",false],
-  ["Feb 1, 2027","Urban Sciences and Planning, summer intake. Earliest realistic start.",true],
-  ["Feb 15, 2027","General UF summer transfer deadline for most other colleges.",false],
-  ["May 1, 2027","Main UF fall transfer deadline. Applies to almost every major here.",true],
-  ["May 15, 2027","Final transcripts due for fall applicants.",false],
-  ["June 15, 2027","Fall admission decisions released.",false],
-  ["Aug 2027","Start at UF.",true]
+  ["Done","AA graduation application filed. Associate in Arts, Fall 2026.","done"],
+  ["Aug 17, 2026","Fall classes start. College Algebra and Managerial Accounting.",""],
+  ["November 2026","Register for spring.",""],
+  ["December 2026","AA degree awarded. Florida AA graduates get transfer priority at UF.","key"],
+  ["Jan 25, 2027","UF Online summer application deadline.",""],
+  ["Feb 1, 2027","Urban Sciences and Planning, summer intake. Earliest realistic start.","key"],
+  ["Feb 15, 2027","General UF summer transfer deadline for most other colleges.",""],
+  ["May 1, 2027","Main UF fall transfer deadline. Applies to almost every major here.","key"],
+  ["May 15, 2027","Final transcripts due for fall applicants.",""],
+  ["June 15, 2027","Fall admission decisions released.",""],
+  ["Aug 2027","Start at UF.","key"]
 ];
 const tl=document.getElementById('tl');
 TL.forEach(([d,t,k])=>{
   tl.insertAdjacentHTML('beforeend',
-    `<div class="ev ${k?'key':''}"><div class="d">${d}</div><div class="t">${t}</div></div>`);
+    `<div class="ev ${k}"><div class="d">${d}</div><div class="t">${t}</div></div>`);
 });
-
-render();
 </script>
 </body>
 </html>
