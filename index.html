@@ -18,6 +18,12 @@
   header{background:var(--navy);color:#fff;padding:26px 22px 22px}
   header h1{margin:0 0 4px;font-size:26px;letter-spacing:-.3px}
   header p{margin:0;color:#a9c2e2;font-size:14px}
+  .switch{display:inline-flex;gap:4px;background:rgba(255,255,255,.14);padding:4px;
+          border-radius:9px;margin-bottom:14px}
+  .switch a{padding:7px 15px;border-radius:6px;font-size:13px;font-weight:700;
+            text-decoration:none;color:#fff;opacity:.72;transition:opacity .15s}
+  .switch a:hover{opacity:1}
+  .switch a.on{background:#fff;color:var(--navy);opacity:1}
   .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
   .hdrwrap{max-width:1120px;margin:0 auto}
 
@@ -109,6 +115,10 @@
 
 <header>
   <div class="hdrwrap">
+    <div class="switch">
+      <a href="index.html" class="on">University of Florida</a>
+      <a href="fsu.html">Florida State</a>
+    </div>
     <h1>Your Options at UF</h1>
     <p>Every major checked against your actual transcript · Updated August 2026</p>
   </div>
@@ -249,7 +259,8 @@ const GROUPS = [
   {g:1, h:"One more class",             note:"A single course opens each of these.", pill:"1 CLASS", pc:"p-need"},
   {g:2, h:"Two more classes",           note:"Doable in one spring semester if any of these interest you.", pill:"2 CLASSES", pc:"p-need"},
   {g:3, h:"Three more classes",         note:"A bigger lift, listed so you know they exist.", pill:"3 CLASSES", pc:"p-need"},
-  {g:4, h:"Requires Survey of Calculus", note:"The business and economics track. Calculus is the only thing missing from all four.", pill:"NEEDS CALCULUS", pc:"p-calc"}
+  {g:4, h:"Requires Survey of Calculus", note:"The business and economics track. Calculus is the only thing missing from all four.", pill:"NEEDS CALCULUS", pc:"p-calc"},
+  {g:5, h:"Ruled out, and why", note:"Listed for completeness so nothing is a surprise later.", pill:"NOT A FIT", pc:"p-fall"}
 ];
 
 const MAJORS = [
@@ -286,26 +297,28 @@ const MAJORS = [
 
   {g:1, n:"Advertising", c:"Journalism and Communications",
    d:"Brand strategy, consumer research and campaigns. The most business-adjacent option in the journalism college, and your accounting and computing courses satisfy a quantitative option there.",
-   have:"Statistics, Microeconomics", needs:"US History since 1877 (AMH 2020). Your AP World History does not substitute.",
-   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
-   link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
+   have:"Argument and Persuasion, American Federal Government, Statistics, Macroeconomics. Four of five.",
+   needs:"US History since 1877 (AMH 2020). Your AP World History and AP American Literature do not substitute.",
+   gpa:"2.0 required, 2.5 stated as the competitive minimum", dl:"Spring: Sept 15 · Summer A: Feb 15 · Fall: May 1",
+   link:"https://www.jou.ufl.edu/admissions/undergraduate-admissions/", contact:"advising@jou.ufl.edu",
+   warn:"Three things to confirm with a journalism advisor before counting on this. It is a limited-access college admitting on a space-available basis. Applicants with 90 or more transfer credits are not considered at all, and whether AP credits count toward that ceiling is not published. And the UF catalog says a transfer AA must include all tracking courses, which would add MMC 1009 to the list, contradicting the college's own admissions handout. Email advising@jou.ufl.edu or call 352-392-1124."},
 
   {g:1, n:"Public Relations", c:"Journalism and Communications",
    d:"Communications strategy, media relations, crisis and reputation management.",
    have:"Statistics, Microeconomics", needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   gpa:"2.0 required, 2.5 stated as the competitive minimum", dl:"Spring: Sept 15 · Summer A: Feb 15 · Fall: May 1",
    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
 
   {g:1, n:"Journalism", c:"Journalism and Communications",
    d:"Reporting and news writing across print, digital and broadcast.",
    have:"Statistics", needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   gpa:"2.0 required, 2.5 stated as the competitive minimum", dl:"Spring: Sept 15 · Summer A: Feb 15 · Fall: May 1",
    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
 
   {g:1, n:"Media Production, Management and Technology", c:"Journalism and Communications",
    d:"The production and business side of media, including management and technology.",
    have:"Statistics", needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.5 to be competitive", dl:"Admits spring, summer and fall",
+   gpa:"2.0 required, 2.5 stated as the competitive minimum", dl:"Spring: Sept 15 · Summer A: Feb 15 · Fall: May 1",
    link:"https://www.jou.ufl.edu/current-students/current-undergraduate/academic-advising/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
 
   {g:1, n:"History", c:"Liberal Arts and Sciences",
@@ -357,11 +370,22 @@ const MAJORS = [
    gpa:"3.0 overall", dl:"Summer: Feb 1 · Fall: May 1",
    link:"https://dcp.ufl.edu/admissions/sbe-advising/", contact:"advising@dcp.ufl.edu"},
 
-  {g:3, n:"Education Sciences", c:"College of Education",
-   d:"Education without classroom teaching certification. Leads to policy, training, ed tech and nonprofit work. No state teaching exam required.",
-   have:"Nothing yet", needs:"Three intro education courses: EDF 1005, EDF 2085 or EEX 2000, and EME 2040",
-   gpa:"2.0 overall", dl:"Fall: May 1 · Spring: Sept 15",
-   link:"https://education.ufl.edu/future-edugators/", contact:"studenthelp@coe.ufl.edu"},
+  {g:1, n:"Education Sciences", c:"College of Education",
+   d:"Education without classroom teaching certification. Leads to policy, training, ed tech and nonprofit work. Confirmed: no state teaching exam required, unlike Elementary and Early Childhood Education.",
+   have:"General education coursework",
+   needs:"Intro to the Teaching Profession (EDF 1005), with a grade of C or better. That is the entire admission requirement.",
+   gpa:"2.0 overall for admission", dl:"Fall: May 1 · Spring: Sept 15 · Summer: Feb 15",
+   link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGEDU/", contact:"studenthelp@coe.ufl.edu",
+   warn:"Two more courses (EDF 2085 or EEX 2000, and EME 2040) are needed once you're in the major, at a 2.33 GPA, but they are not required to be admitted. This is not a limited-access program."},
+
+  {g:3, n:"Public Health (BPH)", c:"Public Health and Health Professions",
+   d:"Population health and health policy. Note the biology requirement is a general biology course, not a majors sequence with a lab.",
+   have:"Statistics",
+   needs:"General Biology (BSC 2005 or BSC 2010), General Psychology (PSY 2012), and Advanced Writing (ENC 2210)",
+   gpa:"3.0 overall AND a separate 3.0 prerequisite GPA, with C or better in each",
+   dl:"Summer B and Fall only, no spring · single deadline Feb 15",
+   link:"https://phhp.ufl.edu/admissions/applications-and-deadlines/application-information/", contact:"advising@phhp.ufl.edu",
+   warn:"Timing is the problem. They evaluate grades through the previous fall and expect three of four prerequisites already graded at application. Since your fall is committed to algebra and accounting, a 2027 entry would be very difficult. Also note the course is BSC 2005 or 2010, not BSC 1005."},
 
   {g:3, n:"Sport Management", c:"Health and Human Performance",
    d:"Management, marketing, finance and law applied to sport organizations. A business degree in practice.",
@@ -398,7 +422,45 @@ const MAJORS = [
    have:"Financial Accounting, Macroeconomics, Statistics",
    needs:"Survey of Calculus (MAC 2233)",
    gpa:"2.0 overall and 2.0 in those courses, C or better in each", dl:"Fall: May 1 · Summer: Feb 15",
-   link:"https://cals.ufl.edu/content/PDF/Transfer_Guide.pdf", contact:"jdolder@ufl.edu"}
+   link:"https://cals.ufl.edu/content/PDF/Transfer_Guide.pdf", contact:"jdolder@ufl.edu"},
+
+  {g:5, n:"Nursing", c:"College of Nursing",
+   d:"Fall entry only, February deadline, separate NursingCAS application.",
+   have:"Statistics",
+   needs:"Anatomy and Physiology 1 and 2 with labs, Microbiology with lab, plus nutrition, human development and a social science. Also the HESI A2 entrance exam.",
+   gpa:"3.0 overall and 3.0 prerequisite", dl:"Fall only",
+   link:"https://nursing.ufl.edu/programs/bachelor-of-science-bsn/traditional-bsn/", contact:"conweb@health.ufl.edu",
+   warn:"Twelve credits of lab science plus an entrance exam. Limited access, and UF states not all qualified applicants are admitted."},
+
+  {g:5, n:"Health Science and Communication Sciences and Disorders", c:"Public Health and Health Professions",
+   d:"Both are blocked twice over.",
+   have:"Statistics",
+   needs:"Biology with lab, Applied Physiology with lab, psychology, and for Communication Sciences also a chemistry or physics course plus a separate science lab",
+   gpa:"Health Science requires 3.2 overall, above your 3.13", dl:"Summer B and Fall only",
+   link:"https://phhp.ufl.edu/academics/undergraduate-programs/", contact:"advising@phhp.ufl.edu",
+   warn:"Health Science's 3.2 GPA minimum is above where you are, separate from the lab requirement. Communication Sciences and Disorders is fall only."},
+
+  {g:5, n:"Engineering, all majors", c:"Herbert Wertheim College of Engineering",
+   d:"UF requires the full calculus and science sequence completed before transferring.",
+   have:"Statistics and College Algebra",
+   needs:"Calculus 1, 2 and 3, Differential Equations, calculus-based Physics 1 and 2 with labs, and Chemistry 1 and 2 with labs",
+   gpa:"2.5 to 2.8 tracking GPA depending on major", dl:"Fall: May 1",
+   link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGENG/", contact:"transfer@eng.ufl.edu",
+   warn:"UF states plainly that completing an AA does not by itself meet these requirements."},
+
+  {g:5, n:"Art, Music, Dance, Digital Arts", c:"College of the Arts",
+   d:"Portfolio or audition gated.",
+   have:"Not applicable",
+   needs:"Studio Art and Graphic Design need a competitive portfolio through SlideRoom. Music requires an audition and a theory exam. Dance BFA requires an audition. Digital Arts and Sciences BA requires a portfolio, due March 1.",
+   gpa:"3.0 for most", dl:"Varies by school",
+   link:"https://arts.ufl.edu/", contact:"saahadvising@arts.ufl.edu",
+   warn:"Two exceptions worth knowing: Theatre BA requires no audition at all, and Digital Arts and Sciences needs only precalculus rather than calculus, with your computing courses possibly covering its programming requirement. Art History has no portfolio but needs five courses including two semesters of college foreign language."},
+
+  {g:5, n:"Construction Management", c:"Design, Construction and Planning",
+   d:"Sits in the same college as Urban Sciences but has a very different math requirement.",
+   have:"Statistics, Economics",
+   needs:"Calculus and physics", gpa:"Varies", dl:"Fall: May 1",
+   link:"https://dcp.ufl.edu/rinker/academics/undergraduate/construction-management/prospective-students/", contact:"sallieas@dcp.ufl.edu"}
 ];
 
 const list = document.getElementById('list');

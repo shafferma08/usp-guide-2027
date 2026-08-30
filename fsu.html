@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Options at FSU</title>
+<style>
+  :root{
+    --garnet:#782F40; --gold:#CEB888; --deep:#4d1e29; --light:#f6eef0; --rule:#e4d3d7;
+    --green:#1e7e34; --greenbg:#e4f3e8; --amber:#b26a00; --amberbg:#fdf1dc;
+    --red:#b02a37; --redbg:#fbe7e9; --gray:#5a6472; --ink:#1c2430; --blue:#1e5aa8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:#f7f5f6;line-height:1.5;font-size:15px}
+  header{background:var(--garnet);color:#fff;padding:26px 22px 22px;border-bottom:4px solid var(--gold)}
+  header h1{margin:0 0 4px;font-size:26px;letter-spacing:-.3px}
+  header p{margin:0;color:#e6cdd4;font-size:14px}
+  .switch{display:inline-flex;gap:4px;background:rgba(255,255,255,.16);padding:4px;
+          border-radius:9px;margin-bottom:14px}
+  .switch a{padding:7px 15px;border-radius:6px;font-size:13px;font-weight:700;
+            text-decoration:none;color:#fff;opacity:.75;transition:opacity .15s}
+  .switch a:hover{opacity:1}
+  .switch a.on{background:#fff;color:var(--garnet);opacity:1}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  .hdrwrap{max-width:1120px;margin:0 auto}
+
+  .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:-26px auto 22px;
+        max-width:1120px;padding:0 22px}
+  .stat{background:#fff;border-radius:9px;padding:14px 16px;box-shadow:0 2px 8px rgba(80,30,42,.12)}
+  .stat b{display:block;font-size:21px;color:var(--garnet);line-height:1.2}
+  .stat span{font-size:11.5px;color:var(--gray);display:block;margin-top:3px}
+
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+  nav.tabs button{border:1px solid var(--rule);background:#fff;color:var(--garnet);padding:9px 16px;
+       border-radius:7px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
+  nav.tabs button.on{background:var(--garnet);color:#fff;border-color:var(--garnet)}
+
+  section.panel{display:none}
+  section.panel.on{display:block}
+
+  h2{font-size:19px;color:var(--garnet);margin:26px 0 4px}
+  h2:first-child{margin-top:0}
+  .sub{color:var(--gray);font-size:13.5px;margin:0 0 14px}
+
+  .alert{background:#fff;border-left:4px solid var(--amber);border-radius:9px;padding:15px 18px;
+         margin-bottom:20px;box-shadow:0 1px 4px rgba(80,30,42,.08)}
+  .alert h4{margin:0 0 6px;font-size:15px;color:var(--amber)}
+  .alert p{margin:0 0 7px;font-size:13.5px;color:var(--gray)}
+  .alert p:last-child{margin-bottom:0}
+  .alert b{color:var(--ink)}
+
+  .grouphd{display:flex;align-items:baseline;gap:10px;margin:28px 0 4px;flex-wrap:wrap}
+  .grouphd:first-child{margin-top:0}
+  .grouphd h3{margin:0;font-size:17.5px;color:var(--garnet)}
+  .grouphd .cnt{font-size:12.5px;color:var(--gray);font-weight:600}
+  .groupnote{font-size:13px;color:var(--gray);margin:0 0 14px}
+
+  .card{background:#fff;border-radius:9px;padding:16px 18px;margin-bottom:12px;
+        box-shadow:0 1px 4px rgba(80,30,42,.08);border-left:4px solid var(--rule)}
+  .card.g0{border-left-color:var(--green)}
+  .card.g1,.card.g2,.card.g3{border-left-color:var(--amber)}
+  .card.g4{border-left-color:var(--red)}
+  .card.g5{border-left-color:var(--gray)}
+
+  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .cname{font-weight:700;font-size:16.5px;color:var(--garnet);margin:0}
+  .ccol{font-size:12px;color:var(--gray);margin:2px 0 0}
+  .pill{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:20px;white-space:nowrap;letter-spacing:.3px}
+  .p-ready{background:var(--greenbg);color:var(--green)}
+  .p-need{background:var(--amberbg);color:var(--amber)}
+  .p-calc{background:var(--redbg);color:var(--red)}
+  .p-fall{background:#eceef1;color:var(--gray)}
+  .desc{font-size:13.5px;color:var(--gray);margin:9px 0 11px}
+
+  .needbox{background:var(--amberbg);border-radius:6px;padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--amber)}
+  .needbox b{color:#8a5200}
+  .havebox{font-size:12.5px;color:var(--green);margin-bottom:11px}
+
+  .meta{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--gray);
+        border-top:1px solid var(--rule);padding-top:10px}
+  .meta b{color:var(--ink)}
+  .meta a{color:var(--blue);text-decoration:none;font-weight:600}
+  .meta a:hover{text-decoration:underline}
+
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:9px;overflow:hidden;
+        box-shadow:0 1px 4px rgba(80,30,42,.08);font-size:13.5px}
+  th{background:var(--garnet);color:#fff;text-align:left;padding:10px 13px;font-size:12px;
+     text-transform:uppercase;letter-spacing:.4px}
+  td{padding:9px 13px;border-top:1px solid #f1eaec}
+  tr:nth-child(even) td{background:#fdfbfc}
+  .g{display:inline-block;min-width:26px;text-align:center;padding:2px 7px;border-radius:4px;
+     font-weight:700;font-size:12px}
+  .gA{background:var(--greenbg);color:var(--green)}
+  .gB{background:#eaf1fa;color:var(--blue)}
+  .gC{background:var(--amberbg);color:var(--amber)}
+  .gP{background:#eef2f7;color:var(--gray)}
+  .gN{background:var(--amberbg);color:var(--amber)}
+  .note{font-size:12.5px;color:var(--gray);margin-top:9px}
+
+  .tl{border-left:2px solid var(--rule);margin-left:8px;padding-left:20px}
+  .tl .ev{position:relative;padding-bottom:18px}
+  .tl .ev::before{content:"";position:absolute;left:-27px;top:4px;width:11px;height:11px;
+       border-radius:50%;background:var(--garnet);border:2px solid #f7f5f6}
+  .tl .ev.key::before{background:var(--gold)}
+  .tl .ev.done::before{background:var(--green)}
+  .tl .d{font-weight:700;color:var(--garnet);font-size:14px}
+  .tl .t{font-size:13.5px;color:var(--gray)}
+
+  .qbox{background:#fff;border-radius:9px;padding:16px 18px;box-shadow:0 1px 4px rgba(80,30,42,.08);
+        margin-bottom:12px;border-left:4px solid var(--gold)}
+  .qbox.warn{border-left-color:var(--amber)}
+  .qbox.done{border-left-color:var(--green)}
+  .qbox h4{margin:0 0 8px;font-size:15px;color:var(--garnet)}
+  .qbox ul{margin:0;padding-left:20px;font-size:13.5px;color:var(--gray)}
+  .qbox li{margin-bottom:6px}
+  .qbox a{color:var(--blue)}
+  footer{text-align:center;font-size:12px;color:#a09298;padding:26px 22px 34px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdrwrap">
+    <div class="switch">
+      <a href="index.html">University of Florida</a>
+      <a href="fsu.html" class="on">Florida State</a>
+    </div>
+    <h1>Your Options at FSU</h1>
+    <p>Every major checked against your actual transcript · Built around a Spring 2027 start</p>
+  </div>
+</header>
+
+<div class="snap">
+  <div class="stat"><b>Oct 1</b><span>spring application deadline</span></div>
+  <div class="stat"><b>Jan 2027</b><span>you could be starting</span></div>
+  <div class="stat"><b>25</b><span>majors you can apply to today</span></div>
+  <div class="stat"><b>3.13</b><span>all-college GPA · 3.0 required</span></div>
+  <div class="stat"><b>$30</b><span>application fee</span></div>
+</div>
+
+<div class="wrap">
+
+<nav class="tabs">
+  <button class="on" data-tab="majors">My Options</button>
+  <button data-tab="transcript">My Transcript</button>
+  <button data-tab="dates">Deadlines</button>
+  <button data-tab="next">What To Do</button>
+</nav>
+
+<section class="panel on" id="majors">
+  <div class="alert">
+    <h4>Read this first: the credit-hour question</h4>
+    <p>FSU sorts transfer applicants into two buckets. Applicants with <b>60 or more credit hours or an AA degree</b> are judged on college GPA alone. Applicants with <b>12 to 59 hours</b> are judged on high school record and SAT or ACT scores, where FSU says "very few students with less than a 3.5 academic GPA will be admissible."</p>
+    <p>At the October 1 deadline you will have <b>54 completed hours</b>, with 6 more in progress and your AA finishing in December. Which bucket FSU puts you in is the single biggest factor in whether a spring application works.</p>
+    <p>The good news: the Social Sciences college says a <b>conditional admission recommendation</b> can be made if you're enrolled only in the courses needed to finish your AA, which describes you exactly. This is a phone call worth making before you apply, not a detail to leave to chance.</p>
+  </div>
+
+  <div class="alert" style="border-left-color:var(--garnet)">
+    <h4>If urban planning is the goal, FSU is not the school</h4>
+    <p>All 167 FSU undergraduate programs were checked. <b>FSU has no bachelor's degree in Urban and Regional Planning.</b> Its planning department offers only a master's, a PhD, and an undergraduate <b>minor</b>.</p>
+    <p>So the route here would be a related major plus the planning minor, which FSU designs as a feeder into its master's program. <b>Interdisciplinary Social Science</b> is the best pairing, and its own requirements literally name urban and regional planning as a qualifying discipline. <b>Environment and Society</b> is the closest thing FSU has to a built-environment degree.</p>
+    <p>Worth saying plainly: UF's Urban Sciences and Planning bachelor's has no FSU equivalent. If that's the degree you want, UF is the stronger choice, and you already qualify for it.</p>
+  </div>
+
+  <div class="alert" style="border-left-color:var(--gold)">
+    <h4>The foreign language catch</h4>
+    <p>Your world language requirement is satisfied for <b>admission</b>, which FSU meets at the high school level. But every <b>College of Arts and Sciences</b> major (English, Philosophy, Religion, Humanities, History, Anthropology) separately requires a foreign language <b>through the intermediate 2220 college level to graduate</b>. That can be up to 12 extra credit hours once you're there.</p>
+    <p>Social Sciences, Hospitality, Business, Public Safety and Anne's College majors carry no such requirement. Where a BS version exists, it usually avoids the language entirely. It's flagged on each card below.</p>
+  </div>
+  <div id="list"></div>
+</section>
+
+<section class="panel" id="transcript">
+  <h2>What you have completed</h2>
+  <p class="sub">From your eSantaFe degree audit. "P" means AP exam credit, which counts for the course but carries no letter grade.</p>
+  <table>
+    <thead><tr><th>Course</th><th>Title</th><th>Grade</th><th>When</th><th>Where</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <p class="note"><b>Two things to know.</b> Intermediate Algebra does not count as college-level math at FSU, so your two math courses are Statistics and College Algebra once fall ends. And FSU counts every attempt at every college you've attended when it calculates your GPA, which is how 3.13 comes out lower than your 3.39 at Santa Fe.</p>
+</section>
+
+<section class="panel" id="dates">
+  <h2>Dates that matter</h2>
+  <p class="sub">FSU's university deadlines. A few programs set their own, noted on the major cards.</p>
+  <div class="tl" id="tl"></div>
+</section>
+
+<section class="panel" id="next">
+  <h2>What to do</h2>
+  <p class="sub">If spring is the goal, the timeline is short.</p>
+
+  <div class="qbox warn">
+    <h4>1. Call FSU admissions this week</h4>
+    <ul>
+      <li>Phone: <b>(850) 644-6200</b>. Email: <a href="mailto:admissions@fsu.edu">admissions@fsu.edu</a></li>
+      <li>Ask: "I'll have 54 completed hours at the October 1 spring deadline, 6 more in progress, and my AA is awarded in December. Will I be evaluated as a junior-level transfer or as a sophomore-level applicant?"</li>
+      <li>That single answer determines whether spring is realistic. Ask it before paying the $30 fee.</li>
+      <li>Also worth asking the Social Sciences mapping team about conditional admission: <a href="mailto:cosspp-admissions-mapping@fsu.edu">cosspp-admissions-mapping@fsu.edu</a></li>
+    </ul>
+  </div>
+
+  <div class="qbox">
+    <h4>2. Gather what the application needs</h4>
+    <ul>
+      <li>Transcripts from <b>every</b> college, sent directly by each school. That means Santa Fe and St. Petersburg College.</li>
+      <li>Your official high school transcript, sent by the high school.</li>
+      <li><b>SAT, ACT or CLT scores</b> for every test taken. Required if you're classified as a sophomore-level applicant, recommended either way. If you never tested, raise that on the phone call.</li>
+      <li>All AP score reports.</li>
+      <li>The residency form, for in-state tuition.</li>
+      <li>Spring applicants need transcripts with grades posted through the previous spring term, so your Spring 2026 grades are what they'll evaluate.</li>
+    </ul>
+  </div>
+
+  <div class="qbox">
+    <h4>3. If spring doesn't work out</h4>
+    <ul>
+      <li>Fall 2027 has a <b>June 1</b> deadline, and by then you'd have the AA in hand and priority consideration as a Florida AA graduate. It's the safer version of the same application.</li>
+      <li>Summer 2027 is <b>March 1</b>, which also comes after your AA posts.</li>
+      <li>Applying and being denied doesn't prevent you from applying again for a later term.</li>
+    </ul>
+  </div>
+
+  <div class="qbox">
+    <h4>4. Worth knowing</h4>
+    <ul>
+      <li>Every Arts and Sciences major (English, Philosophy, Religion, History, Humanities) requires a <b>foreign language through the intermediate level to graduate</b>. That's not an admission barrier, but it could be up to 12 credit hours at FSU depending on placement. The Social Sciences and Hospitality majors don't carry that requirement.</li>
+      <li>FSU charges <b>double tuition for credits beyond 132 hours</b>, so transferring efficiently matters.</li>
+      <li>Most Social Sciences majors require a minor. International Affairs does not.</li>
+      <li>Unlike UF, FSU's business school is <b>not limited enrollment</b>. Calculus is a real requirement there, but not a competition for seats.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Built from your eSantaFe degree audit and FSU's published transfer requirements and Academic Program Guide, August 2026.<br>
+  Requirements change. Confirm anything important with an FSU advisor before relying on it.
+</footer>
+
+<script>
+const TRANSCRIPT = [
+  ["WOH 2022","World History 2","P","Summer 2023","AP exam"],
+  ["LIT 2000","Literature Appreciation","P","Spring 2024","AP exam"],
+  ["AML 2020","Survey of American Literature 2","P","Spring 2024","AP exam"],
+  ["HSS 9001C","Humanities / Social Science","P","Spring 2024","AP exam"],
+  ["ENC 1101","College Composition 1","C","Fall 2024","St. Petersburg College"],
+  ["ENC 1102","College Composition 2","C","Spring 2025","St. Petersburg College"],
+  ["POS 2041","American Federal Government","P","Spring 2025","AP exam"],
+  ["ECO 2013","Principles of Macroeconomics","P","Spring 2025","AP exam"],
+  ["SLS 1301","Life / Career Development","B","Spring 2025","St. Petersburg College"],
+  ["AST 1002","Astronomy","B","Fall 2025","Santa Fe"],
+  ["CGS 1000","Introduction to College Computing","A","Fall 2025","Santa Fe"],
+  ["ECO 2023","Principles of Microeconomics","B","Fall 2025","Santa Fe"],
+  ["MAT 1033","Intermediate Algebra","B","Fall 2025","Santa Fe"],
+  ["ACG 2001","Principles of Accounting 1","A","Spring 2026","Santa Fe"],
+  ["CGS 2100","Computer Applications for Business","A","Spring 2026","Santa Fe"],
+  ["EVR 1001","Introduction to Environmental Science","B","Spring 2026","Santa Fe"],
+  ["STA 2023","Introduction to Statistics","B","Spring 2026","Santa Fe"],
+  ["ACG 2011","Principles of Accounting 2","B+","Summer 2026","Santa Fe"],
+  ["MAC 1105","College Algebra","IN PROGRESS","Fall 2026","Santa Fe"],
+  ["ACG 2071","Managerial Accounting","IN PROGRESS","Fall 2026","Santa Fe"]
+];
+const tb=document.getElementById('tbody');
+TRANSCRIPT.forEach(r=>{
+  let cls='gP';
+  if(r[2]==='A')cls='gA'; else if(r[2][0]==='B')cls='gB';
+  else if(r[2]==='C')cls='gC'; else if(r[2]==='IN PROGRESS')cls='gN';
+  tb.insertAdjacentHTML('beforeend',
+    `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><span class="g ${cls}">${r[2]}</span></td><td>${r[3]}</td><td>${r[4]}</td></tr>`);
+});
+
+const GROUPS=[
+  {g:0,h:"Ready to apply now, and they take spring students",note:"Nothing more to take. Every one of these admits for spring on the October 1 deadline, and none is a limited-access program.",pill:"READY · SPRING",pc:"p-ready"},
+  {g:1,h:"One more class",note:"A single course at Santa Fe opens each of these.",pill:"1 CLASS",pc:"p-need"},
+  {g:2,h:"Two more classes",note:"Reachable, but not before an October 1 spring deadline.",pill:"2 CLASSES",pc:"p-need"},
+  {g:3,h:"Three or more classes",note:"Listed so you know they exist.",pill:"3+ CLASSES",pc:"p-need"},
+  {g:4,h:"Requires Business Calculus",note:"You have every other business prerequisite already. MAC 2233 is the only thing missing from all of these.",pill:"NEEDS CALCULUS",pc:"p-calc"},
+  {g:5,h:"Fall only, or the program starts in fall regardless",note:"You cannot begin these in spring, even if FSU admits you for spring. Worth knowing for a Fall 2027 application instead.",pill:"FALL ONLY",pc:"p-fall"},
+  {g:6,h:"Ruled out, and why",note:"Listed for completeness so nothing is a surprise later. All 167 FSU undergraduate programs were checked.",pill:"NOT A FIT",pc:"p-fall"}
+];
+
+const MAJORS=[
+  {g:0,star:true,n:"Criminology and Criminal Justice",c:"College of Criminology and Criminal Justice",
+   d:"FSU's criminology program is one of the best known in the country. Leads to law school, federal agencies, courts, and policy research.",
+   have:"No prerequisite coursework required at all",gpa:"2.0 program minimum, but FSU's university bar is 3.0",
+   dl:"Spring: Oct 1",link:"https://academic-guide.fsu.edu/program-guide/Criminology%20-%20Criminal%20Justice",contact:"admissions@fsu.edu"},
+
+  {g:0,star:true,n:"Interdisciplinary Social Science",c:"Social Sciences and Public Policy",
+   d:"Build a degree across economics, political science and sociology. The most flexible way to use what you've already taken.",
+   have:"Two intro social science courses — your Macroeconomics, Microeconomics and American Government all count",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Interdisciplinary%20Social%20Science",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:0,star:true,n:"Hospitality and Tourism Management",c:"Dedman College of Hospitality",
+   d:"Business management applied to hotels, resorts, restaurants and tourism. A business-flavored degree with no calculus requirement.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Hospitality%20and%20Tourism%20Management",contact:"admissions@fsu.edu"},
+
+  {g:0,n:"Event Management",c:"Dedman College of Hospitality",
+   d:"Planning and running large events, conferences and festivals. Operations and marketing focused.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Event%20Management",contact:"admissions@fsu.edu"},
+
+  {g:0,n:"Global Club Management and Leadership",c:"Dedman College of Hospitality",
+   d:"Management of private clubs, golf and country clubs, and member organizations.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Global%20Club%20Management%20and%20Leadership",contact:"admissions@fsu.edu"},
+
+  {g:0,n:"Recreation and Tourism Management",c:"Dedman College of Hospitality",
+   d:"Managing parks, recreation programs and tourism operations.",
+   have:"A computing course, satisfied by your Computer Applications for Business (A)",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Recreation%20and%20Tourism%20Management",contact:"admissions@fsu.edu"},
+
+  {g:0,n:"Public Health",c:"Social Sciences and Public Policy",
+   d:"Population health, epidemiology and health policy. A growing field with strong job prospects.",
+   have:"No prerequisites required. Statistics is recommended and you have it.",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Public%20Health",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:0,n:"Environment and Society",c:"Social Sciences and Public Policy",
+   d:"Environmental policy and sustainability from the social science side, so no chemistry or biology labs.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Environment%20and%20Society",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:0,n:"International Affairs (Broad Curriculum)",c:"Social Sciences and Public Policy",
+   d:"Global politics, economics and diplomacy. One of the few FSU majors with no minor requirement.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/International%20Affairs%20(Broad%20Curriculum)",contact:"cosspp-admissions-mapping@fsu.edu",
+   warn:"Requires a foreign language through the intermediate level to graduate."},
+
+  {g:0,n:"Emergency Management",c:"Social Sciences and Public Policy",
+   d:"Disaster response, homeland security and intelligence. A newer FSU program.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Emergency%20Management",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:0,n:"English (Editing, Writing and Media)",c:"Arts and Sciences",
+   d:"The most career-oriented English track, focused on professional writing, editing and digital media.",
+   have:"Six hours of English — your two Composition courses cover it",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/English%20(Editing,%20Writing,%20&%20Media)",contact:"admissions@fsu.edu",
+   warn:"Arts and Sciences majors require a foreign language through the intermediate level to graduate."},
+
+  {g:0,n:"English (Literature, Media and Culture)",c:"Arts and Sciences",
+   d:"The traditional literature track.",
+   have:"Six hours of English — your two Composition courses cover it",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/English%20(Literature,%20Media,%20and%20Culture)",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate."},
+
+  {g:0,n:"English (Creative Writing)",c:"Arts and Sciences",
+   d:"Fiction, poetry and nonfiction writing.",
+   have:"Six hours of English — your two Composition courses cover it",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/English%20(Creative%20Writing)",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate."},
+
+  {g:0,n:"Philosophy",c:"Arts and Sciences",
+   d:"Logic, ethics and reasoning. Strong preparation for law school.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Philosophy",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate."},
+
+  {g:0,n:"Religion",c:"Arts and Sciences",
+   d:"Comparative study of world religions.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Religion",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate."},
+
+  {g:0,n:"Humanities",c:"Arts and Sciences",
+   d:"Awards a BA in Interdisciplinary Humanities. Combine literature, history, philosophy and the arts.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Humanities",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate."},
+
+  {g:0,n:"Middle Eastern Studies",c:"Arts and Sciences",
+   d:"Regional politics, history and culture.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Middle%20Eastern%20Studies",contact:"admissions@fsu.edu",
+   warn:"Requires 15 hours of Arabic or Hebrew to graduate, the heaviest language load on this list."},
+
+  {g:0,n:"International Affairs (Asian Studies)",c:"Social Sciences and Public Policy",
+   d:"International affairs with an Asia focus.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/International%20Affairs%20(Asian%20Studies)",contact:"cosspp-admissions-mapping@fsu.edu",
+   warn:"Requires Chinese, Japanese or Arabic through intermediate level to graduate."},
+
+  {g:0,n:"International Affairs (Russian and East European Studies)",c:"Social Sciences and Public Policy",
+   d:"International affairs with a Russian and Eastern European focus.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/International%20Affairs%20(Russian%20and%20East%20European%20Studies)",contact:"cosspp-admissions-mapping@fsu.edu",
+   warn:"Requires a regional language through intermediate level to graduate."},
+
+  {g:0,n:"African American Studies",c:"Social Sciences and Public Policy",
+   d:"History, politics and culture. Take the BS version and there is no foreign language requirement at all.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/African%20American%20Studies",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:0,n:"Law Enforcement Operations",c:"College of Applied Studies · Public Safety and Security",
+   d:"Policing, investigations and public safety leadership. Based at Panama City but offered fully online to any FSU student, so you would not have to move.",
+   have:"No prerequisite coursework required at all",gpa:"2.0 with an AA",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Law%20Enforcement%20Operations",contact:"admissions@fsu.edu"},
+
+  {g:0,n:"Law Enforcement Intelligence",c:"College of Applied Studies · Public Safety and Security",
+   d:"The analysis side of law enforcement. Also fully online.",
+   have:"College Algebra and Statistics, which is the entire requirement",gpa:"2.0 with an AA",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Law%20Enforcement%20Intelligence",contact:"admissions@fsu.edu"},
+
+  {g:0,n:"Crime Scene Investigation",c:"College of Applied Studies · Public Safety and Security",
+   d:"Forensic evidence collection and analysis. Fully online.",
+   have:"No prerequisite coursework required",gpa:"2.0 with an AA",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Crime%20Scene%20Investigation",contact:"admissions@fsu.edu",
+   warn:"Four required lab courses are offered in summer only, which affects scheduling but not admission."},
+
+  {g:0,n:"Intelligence Studies",c:"Social Sciences and Public Policy",
+   d:"Intelligence analysis, national security and threat assessment. Sits alongside Emergency Management.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Intelligence%20Studies",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:0,n:"Human Rights and Social Justice",c:"Arts and Sciences",
+   d:"Human rights law, ethics and advocacy. Awards a BA in Religion.",
+   have:"No prerequisite coursework required",gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Human%20Rights%20and%20Social%20Justice",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate. You also propose a plan of study by the end of your second semester in the major."},
+
+  {g:1,n:"Political Science",c:"Social Sciences and Public Policy",
+   d:"Government, policy and political institutions. Another common pre-law route.",
+   have:"American Federal Government (AP)",
+   needs:"One more POS, INR or CPO course. For example Intro to Comparative Government (CPO 2002) or Intro to International Relations (INR 2002).",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Political%20Science",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:1,n:"History",c:"Arts and Sciences",
+   d:"Your AP World History already counts as one of the two required history courses.",
+   have:"World History 2 (AP)",
+   needs:"One more history course with an AMH, EUH, ASH, AFH, LAH, HIS or WOH prefix. US History (AMH 2010 or AMH 2020) is the easiest to find.",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/History",contact:"admissions@fsu.edu",
+   warn:"Foreign language through intermediate level required to graduate."},
+
+  {g:1,n:"Communication (Media and Communication Studies)",c:"Communication and Information",
+   d:"Media, messaging and communication theory. The one Communication track at FSU that is not limited access.",
+   have:"General education English and math",
+   needs:"Mass Media Communication (MMC 2000)",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Communication%20(Media%20and%20Communication%20Studies)",contact:"admissions@fsu.edu"},
+
+  {g:1,n:"Entrepreneurship (Commercial)",c:"Jim Moran College of Entrepreneurship",
+   d:"FSU's standalone entrepreneurship college, separate from the business school. The only business-flavored path here that stops at College Algebra instead of calculus.",
+   have:"Macroeconomics, Microeconomics, Statistics, and College Algebra once fall ends",
+   needs:"One Leadership course with an LDR prefix. Your Life and Career Development course does not count.",
+   gpa:"3.0 across the prerequisite courses",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Entrepreneurship%20(Commercial)",contact:"admissions@fsu.edu",
+   warn:"The 3.0 prerequisite GPA is tight. Your AP macroeconomics carries no grade, and your two graded prerequisites are both B, putting you right at 3.0. You'd need B or better in both College Algebra and the leadership course."},
+
+  {g:2,n:"Sociology",c:"Social Sciences and Public Policy",
+   d:"Social structures, institutions and inequality.",
+   have:"Nothing yet",needs:"Two sociology courses, for example Introductory Sociology (SYG 1000) and Social Problems (SYG 2010)",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Sociology",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:2,n:"Geography",c:"Social Sciences and Public Policy",
+   d:"Human geography, mapping and spatial analysis.",
+   have:"Nothing yet. Your Environmental Science does not carry a GEO prefix.",
+   needs:"Two introductory geography courses, for example World Regional Geography (GEA 1000) and Human Geography (GEO 1400)",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Geography",contact:"cosspp-admissions-mapping@fsu.edu"},
+
+  {g:2,n:"Human Development and Family Sciences",c:"Health and Human Sciences",
+   d:"Child development, family systems and human services careers.",
+   have:"Statistics",needs:"Child Growth and Development (CHD 2220) and Family Relationships (FAD 2230)",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Human%20Development%20and%20Family%20Sciences",contact:"admissions@fsu.edu"},
+
+  {g:3,n:"Psychology",c:"Arts and Sciences",
+   d:"Not a lab-science wall. The biology requirement is any biology department course, no lab specified.",
+   have:"Statistics",needs:"A biology course (BSC prefix), General Psychology (PSY 2012), and 3 hours of psychology electives",
+   gpa:"2.0 program minimum",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Psychology",contact:"admissions@fsu.edu",
+   warn:"Three courses is not achievable before an October 1 deadline. This is a Fall 2027 option."},
+
+  {g:3,n:"Social Work (BSW)",c:"College of Social Work",
+   d:"Direct practice social work, leading to licensure. Worth knowing that the biology prerequisite is general biology for non-majors with no lab, so your no-lab-science constraint does not block this one.",
+   have:"American Government and Economics, two of the five prerequisites",
+   needs:"General Biology for non-majors (BSC 1005), General Psychology (PSY 2012), and Introductory Sociology (SYG 1000)",
+   gpa:"3.0 overall. You are at 3.13.",
+   dl:"Spring: Nov 1 · Fall: Jun 1 · separate application",
+   link:"https://csw.fsu.edu/academics/bsw-program",contact:"admissions@fsu.edu",
+   warn:"Three prerequisites is too many to finish before the November 1 spring deadline, and all general education must be done before admission. Realistic target is Fall 2027."},
+
+  {g:4,star:true,n:"Accounting",c:"Wertheim College of Business",
+   d:"FSU's business school is not limited enrollment, so there is no competition for seats. Your accounting grades are strong: an A and a B+.",
+   have:"Financial Accounting (your two-course sequence, which FSU accepts), Managerial Accounting, Computing, Macroeconomics, Microeconomics, Statistics. Six of seven.",
+   needs:"Business Calculus (MAC 2233)",
+   gpa:"2.5 across the prerequisites, and B or better in both accounting courses. Yours is around 3.47.",
+   dl:"Spring: Oct 1",link:"https://wertheim.fsu.edu/undergraduate/admission-and-certification-requirements",contact:"admissions@fsu.edu"},
+
+  {g:4,n:"Finance",c:"Wertheim College of Business",
+   d:"Corporate finance, investments and financial analysis.",
+   have:"Six of the seven business prerequisites",needs:"Business Calculus (MAC 2233)",
+   gpa:"2.5 across the prerequisites",dl:"Spring: Oct 1",
+   link:"https://wertheim.fsu.edu/undergraduate/admission-and-certification-requirements",contact:"admissions@fsu.edu"},
+
+  {g:4,n:"Management Information Systems",c:"Wertheim College of Business",
+   d:"Where business and technology meet. Your two computing courses are a natural fit.",
+   have:"Six of the seven business prerequisites",needs:"Business Calculus (MAC 2233)",
+   gpa:"2.5 across the prerequisites",dl:"Spring: Oct 1",
+   link:"https://wertheim.fsu.edu/undergraduate/admission-and-certification-requirements",contact:"admissions@fsu.edu"},
+
+  {g:4,n:"Management, Marketing, Real Estate, Risk Management, Professional Sales, Human Resources",c:"Wertheim College of Business",
+   d:"The limited-access business majors. Same seven prerequisites, but admission is competitive rather than automatic.",
+   have:"Six of the seven business prerequisites",needs:"Business Calculus (MAC 2233)",
+   gpa:"2.9 cumulative across all college work. You are at 3.13.",dl:"Spring: Oct 1",
+   link:"https://wertheim.fsu.edu/undergraduate/admission-and-certification-requirements",contact:"admissions@fsu.edu"},
+
+  {g:4,n:"Economics",c:"Social Sciences and Public Policy",
+   d:"An unusual case. You meet the admission requirements today with Macroeconomics and Microeconomics.",
+   have:"Macroeconomics and Microeconomics, which is all that admission requires",
+   needs:"Calculus is not required to get in, but it is required to graduate for anyone entering the major from Fall 2024 onward.",
+   gpa:"2.5 between the two economics courses",dl:"Spring: Oct 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Economics",contact:"cosspp-admissions-mapping@fsu.edu",
+   warn:"You could be admitted now and take calculus at FSU later, which is the one place calculus can be deferred."},
+
+  {g:5,n:"Sport Management",c:"Anne Spencer Daves College of Education",
+   d:"The frustrating one. You already meet every prerequisite through your accounting, computing, economics and statistics courses, and you clear the 2.75 GPA requirement.",
+   have:"All nine prerequisite hours, satisfied several times over",
+   needs:"Nothing academically. The program simply does not admit spring students.",
+   gpa:"2.75 cumulative. You are at 3.13.",
+   dl:"Fall only · application due March 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Sport%20Management",contact:"annescollege.fsu.edu/admissions-ug-sm",
+   warn:"Apply by March 1, 2027 for a Fall 2027 start. This is the strongest Fall 2027 option on the list."},
+
+  {g:5,n:"Public Relations, Advertising, Digital Media Production",c:"Communication and Information",
+   d:"The limited-access Communication majors. Separate application portal, competitive admission.",
+   have:"General education English and math",
+   needs:"A separate application package by December 31, plus a 3.0 overall GPA. Digital Media Production also needs MMC 2000.",
+   gpa:"3.0 on all college coursework. You are at 3.13, with no margin.",
+   dl:"Separate deadline: Dec 31 · spring availability unconfirmed",
+   link:"https://academic-guide.fsu.edu/program-guide/Public%20Relations%20(Communication)",contact:"admissions@fsu.edu",
+   warn:"FSU's program guide does not state whether these admit for spring. Call the School of Communication before counting on them."},
+
+  {g:5,n:"Elementary, English, Social Science and Special Education",c:"Anne Spencer Daves College of Education, Health and Human Sciences",
+   d:"FSU can admit you to the university in spring, but all four teaching pathways run on a fall cohort model.",
+   have:"General education English and math",
+   needs:"Intro to Education (EDF 1005) with a field experience, plus subject-area courses that vary by pathway",
+   gpa:"2.5 cumulative across all colleges",dl:"Jun 1 for fall · Oct 1 for spring",
+   link:"https://academic-guide.fsu.edu/program-guide/Elementary%20Education",contact:"admissions@fsu.edu",
+   warn:"FSU states students are formally admitted to Educator Preparation in the fall term regardless of when they are admitted to the university, and that a spring admit adds an extra term to the program. All four also require state FTCE certification exams that cannot be waived."},
+
+  {g:5,n:"Blindness and Low Vision",c:"Anne Spencer Daves College of Education, Health and Human Sciences",
+   d:"Specialized teaching credential. Listed because it is fall-only and easy to miss.",
+   have:"General education coursework",needs:"A natural science lab course and Intro to Education",
+   gpa:"2.5 cumulative",dl:"Fall only · June 1",
+   link:"https://academic-guide.fsu.edu/program-guide/Blindness%20and%20Low%20Vision",contact:"admissions@fsu.edu"},
+
+  {g:5,n:"Motion Picture Arts, Theatre BFA, Music Theatre, Stage Management",c:"Motion Picture Arts and Fine Arts",
+   d:"All fall-entry only, and all gated by portfolio, audition or interview held in January and February for the following fall.",
+   have:"Not applicable",needs:"A portfolio, audition or interview depending on the program",
+   gpa:"Varies",dl:"Fall only · Motion Picture Arts transfers due January 15",
+   link:"https://academic-guide.fsu.edu/program-guide/Motion%20Picture%20Arts%20(Production)",contact:"admissions@fsu.edu",
+   warn:"Stage Management interviews are described as open to incoming freshmen only, not transfers."},
+
+  {g:6,n:"Anything requiring lab sciences",c:"Multiple colleges",
+   d:"Nursing, Exercise Physiology, Dietetics, Athletic Training, Neuroscience, Interdisciplinary Medical Sciences, Environmental Science, and the biology, chemistry and physics majors.",
+   have:"Astronomy and Environmental Science, neither of which carries the required prefixes",
+   needs:"Anatomy and Physiology, General Biology, or General Chemistry sequences with labs",
+   gpa:"Varies, Nursing needs 3.0",dl:"Varies",
+   link:"https://academic-guide.fsu.edu/all-programs",contact:"admissions@fsu.edu",
+   warn:"Two of these actually prefer spring transfers. Athletic Training encourages spring only, and Dietetics requires a spring or summer start. Both are still blocked by the lab requirement."},
+
+  {g:6,n:"Engineering, Computer Science, Statistics, Mathematics",c:"FAMU-FSU Engineering and Arts and Sciences",
+   d:"All seven engineering majors plus the quantitative sciences.",
+   have:"Statistics and College Algebra",
+   needs:"Calculus 1 and 2 at minimum, often Calculus 3, plus chemistry or physics with labs",
+   gpa:"Varies",dl:"No term restriction, the barrier is purely the math",
+   link:"https://academic-guide.fsu.edu/all-programs",contact:"admissions@fsu.edu",
+   warn:"FSU states plainly that completing an AA degree does not satisfy the engineering math requirements."},
+
+  {g:6,n:"College of Music and Fine Arts performance programs",c:"Music and Fine Arts",
+   d:"Around 20 music programs plus Dance and Studio Art BFA.",
+   have:"Not applicable",needs:"A placement audition heard by a faculty jury, or a 20-image portfolio for Studio Art BFA",
+   gpa:"3.0 for Studio Art BFA",dl:"Audition dates are not published in the program guide",
+   link:"https://academic-guide.fsu.edu/all-programs",contact:"admissions@fsu.edu",
+   warn:"Two exceptions with no audition: Music (Business) and Music (Community), which use essays and interviews instead. Studio Art BA and Theatre BA also have no portfolio or audition requirement."},
+
+  {g:6,n:"Financial Planning",c:"College of Applied Studies",
+   d:"Included only so it isn't a surprise.",
+   have:"Not applicable",needs:"Nothing will help",
+   gpa:"Not applicable",dl:"Not available",
+   link:"https://academic-guide.fsu.edu/all-programs",contact:"admissions@fsu.edu",
+   warn:"FSU has suspended this major. It stopped accepting new students as of Fall 2026."},
+
+  {g:6,n:"Interior Design",c:"College of Fine Arts",
+   d:"Uses a first-year review that cuts to the top 30 to 36 students.",
+   have:"Not applicable",
+   needs:"Four foundation courses that must be taken at FSU with a B-minus or better, then survive the spring review",
+   gpa:"3.0 overall",dl:"Varies",
+   link:"https://academic-guide.fsu.edu/program-guide/Interior%20Design",contact:"admissions@fsu.edu",
+   warn:"Effectively closed to a transfer entering at junior standing, since the gate happens in the first year."}
+];
+
+const list=document.getElementById('list');
+GROUPS.forEach(grp=>{
+  const items=MAJORS.filter(m=>m.g===grp.g);
+  if(!items.length)return;
+  list.insertAdjacentHTML('beforeend',
+    `<div class="grouphd"><h3>${grp.h}</h3><span class="cnt">${items.length} major${items.length>1?'s':''}</span></div>
+     <p class="groupnote">${grp.note}</p>`);
+  items.forEach(m=>{
+    list.insertAdjacentHTML('beforeend',`
+      <div class="card g${m.g}">
+        <div class="ctop">
+          <div><p class="cname">${m.star?'★ ':''}${m.n}</p><p class="ccol">${m.c}</p></div>
+          <span class="pill ${grp.pc}">${grp.pill}</span>
+        </div>
+        <p class="desc">${m.d}</p>
+        ${m.needs?`<div class="needbox"><b>Still need:</b> ${m.needs}</div>`:''}
+        <p class="havebox"><b>✓ You already have:</b> ${m.have}</p>
+        ${m.warn?`<p class="desc" style="color:var(--amber)"><b>Note:</b> ${m.warn}</p>`:''}
+        <div class="meta">
+          <span><b>GPA:</b> ${m.gpa}</span>
+          <span><b>Deadline:</b> ${m.dl}</span>
+          <a href="${m.link}" target="_blank" rel="noopener">Official page ↗</a>
+        </div>
+      </div>`);
+  });
+});
+
+document.querySelector('nav.tabs').addEventListener('click',e=>{
+  const t=e.target.dataset.tab; if(!t)return;
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  document.querySelectorAll('section.panel').forEach(p=>p.classList.toggle('on',p.id===t));
+});
+
+const TL=[
+  ["Done","AA graduation application filed at Santa Fe.","done"],
+  ["This week","Call FSU admissions, (850) 644-6200, about the 54-hour question. This decides everything.","key"],
+  ["September 2026","Request transcripts from Santa Fe and St. Petersburg College, plus your high school. Order test scores if you have them.",""],
+  ["Oct 1, 2026","FSU spring transfer deadline. Application plus all supporting documents.","key"],
+  ["December 2026","AA degree awarded. Fall grades post.","key"],
+  ["January 2027","Spring semester at FSU begins, if admitted.","key"],
+  ["Mar 1, 2027","FSU summer deadline. Also the Sport Management deadline for Fall 2027.",""],
+  ["Jun 1, 2027","FSU fall deadline. The safer path, with your AA already in hand.","key"]
+];
+const tl=document.getElementById('tl');
+TL.forEach(([d,t,k])=>{
+  tl.insertAdjacentHTML('beforeend',`<div class="ev ${k}"><div class="d">${d}</div><div class="t">${t}</div></div>`);
+});
+</script>
+</body>
+</html>
