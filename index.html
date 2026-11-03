@@ -8,757 +8,328 @@
 <style>
   :root{
     --navy:#0f2a52; --blue:#1e5aa8; --light:#eaf1fa; --rule:#d5e0ef;
-    --green:#1e7e34; --greenbg:#e4f3e8; --amber:#b26a00; --amberbg:#fdf1dc;
-    --red:#b02a37; --redbg:#fbe7e9; --gray:#5a6472; --ink:#1c2430;
-    --orange:#fa4616; --purple:#5b3fa8; --purplebg:#efeafb;
+    --green:#1e7e34; --greenbg:#e4f3e8; --amber:#a35f00; --amberbg:#fdf1dc;
+    --red:#b02a37; --redbg:#fbe7e9; --gray:#5a6472; --ink:#1c2430; --orange:#fa4616;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-       color:var(--ink);background:#f4f6f9;line-height:1.5;font-size:15px}
-  header{background:var(--navy);color:#fff;padding:26px 22px 46px}
-  header h1{margin:0 0 4px;font-size:26px;letter-spacing:-.3px}
+       color:var(--ink);background:#f4f6f9;line-height:1.55;font-size:16px}
+  header{background:var(--navy);color:#fff;padding:26px 20px 30px}
+  .inner{max-width:860px;margin:0 auto}
+  header h1{margin:0 0 4px;font-size:28px;letter-spacing:-.3px}
   header p{margin:0;color:#a9c2e2;font-size:14px}
-  .switch{display:inline-flex;gap:4px;background:rgba(255,255,255,.14);padding:4px;
-          border-radius:9px;margin-bottom:14px}
-  .switch a{padding:7px 15px;border-radius:6px;font-size:13px;font-weight:700;
-            text-decoration:none;color:#fff;opacity:.72;transition:opacity .15s}
-  .switch a:hover{opacity:1}
+  .switch{display:inline-flex;gap:4px;background:rgba(255,255,255,.14);padding:4px;border-radius:9px;margin-bottom:16px}
+  .switch a{padding:7px 15px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;color:#fff;opacity:.75}
   .switch a.on{background:#fff;color:var(--navy);opacity:1}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
-  .hdrwrap{max-width:1120px;margin:0 auto}
+  main{max-width:860px;margin:0 auto;padding:26px 20px 10px}
 
-  .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:-26px auto 26px;
-        max-width:1120px;padding:0 22px}
-  .stat{background:#fff;border-radius:9px;padding:14px 16px;box-shadow:0 2px 8px rgba(16,42,82,.09)}
-  .stat b{display:block;font-size:21px;color:var(--navy);line-height:1.2}
-  .stat span{font-size:11.5px;color:var(--gray);display:block;margin-top:3px}
+  section{margin-bottom:40px}
+  h2{font-size:22px;color:var(--navy);margin:0 0 6px}
+  .lead{color:var(--gray);margin:0 0 16px;font-size:15px}
 
-  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-  nav.tabs button{border:1px solid var(--rule);background:#fff;color:var(--navy);padding:9px 16px;
-       border-radius:7px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
-  nav.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .box{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 4px rgba(16,42,82,.08);margin-bottom:14px}
+  .box.urgent{border-left:5px solid var(--orange)}
+  .box ol,.box ul{margin:0;padding-left:22px}
+  .box li{margin-bottom:10px}
+  .box li:last-child{margin-bottom:0}
 
-  section.panel{display:none}
-  section.panel.on{display:block}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:14px}
+  .fact{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 4px rgba(16,42,82,.08)}
+  .fact b{display:block;font-size:22px;color:var(--navy);line-height:1.2}
+  .fact span{font-size:13px;color:var(--gray)}
 
-  h2{font-size:19px;color:var(--navy);margin:26px 0 4px}
-  h2:first-child{margin-top:0}
-  .sub{color:var(--gray);font-size:13.5px;margin:0 0 14px}
+  .opt{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 4px rgba(16,42,82,.08);
+       margin-bottom:14px;border-left:5px solid var(--rule)}
+  .opt.good{border-left-color:var(--green)}
+  .opt.maybe{border-left-color:var(--amber)}
+  .opt.hard{border-left-color:var(--red)}
+  .opthead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .opt h3{margin:0;font-size:18px;color:var(--navy)}
+  .chance{font-size:13px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap}
+  .good .chance{background:var(--greenbg);color:var(--green)}
+  .maybe .chance{background:var(--amberbg);color:var(--amber)}
+  .hard .chance{background:var(--redbg);color:var(--red)}
+  .opt p{margin:8px 0 0;font-size:15px}
+  .opt .what{color:var(--gray)}
+  .opt .row{margin-top:6px;font-size:15px}
+  .opt .row b{color:var(--ink)}
+  .opt a{color:var(--blue);font-size:14px}
 
-  .grouphd{display:flex;align-items:baseline;gap:10px;margin:28px 0 4px;flex-wrap:wrap}
-  .grouphd:first-child{margin-top:0}
-  .grouphd h3{margin:0;font-size:17.5px;color:var(--navy)}
-  .grouphd .cnt{font-size:12.5px;color:var(--gray);font-weight:600}
-  .groupnote{font-size:13px;color:var(--gray);margin:0 0 14px}
-
-  .card{background:#fff;border-radius:9px;padding:16px 18px;margin-bottom:12px;
-        box-shadow:0 1px 4px rgba(16,42,82,.07);border-left:4px solid var(--rule)}
-  .card.g0{border-left-color:var(--green)}
-  .card.g1,.card.g2,.card.g3{border-left-color:var(--amber)}
-  .card.g4{border-left-color:var(--red)}
-
-  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
-  .cname{font-weight:700;font-size:16.5px;color:var(--navy);margin:0}
-  .ccol{font-size:12px;color:var(--gray);margin:2px 0 0}
-  .pills{display:flex;gap:6px;flex-wrap:wrap}
-  .pill{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:20px;white-space:nowrap;letter-spacing:.3px}
-  .p-ready{background:var(--greenbg);color:var(--green)}
-  .p-need{background:var(--amberbg);color:var(--amber)}
-  .p-calc{background:var(--redbg);color:var(--red)}
-  .p-fall{background:#eef2f7;color:var(--gray)}
-  .p-online{background:var(--purplebg);color:var(--purple)}
-  .p-new{background:var(--light);color:var(--blue)}
-  .desc{font-size:13.5px;color:var(--gray);margin:9px 0 11px}
-
-  .needbox{background:var(--amberbg);border-radius:6px;padding:9px 12px;margin-bottom:11px;font-size:13px;color:var(--amber)}
-  .needbox b{color:#8a5200}
-  .havebox{font-size:12.5px;color:var(--green);margin-bottom:11px}
-  .havebox b{color:var(--green)}
-  .oddsbox{font-size:13px;margin:0 0 11px;padding:8px 12px;border-radius:6px;background:var(--light);color:var(--navy)}
-
-  .meta{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--gray);
-        border-top:1px solid var(--rule);padding-top:10px}
-  .meta b{color:var(--ink)}
-  .meta a{color:var(--blue);text-decoration:none;font-weight:600;overflow-wrap:anywhere}
-  .meta a:hover{text-decoration:underline}
-
-  .tablewrap{overflow-x:auto;border-radius:9px;box-shadow:0 1px 4px rgba(16,42,82,.07)}
-  table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}
-  th{background:var(--navy);color:#fff;text-align:left;padding:10px 13px;font-size:12px;
-     text-transform:uppercase;letter-spacing:.4px}
-  td{padding:9px 13px;border-top:1px solid #eef2f7;vertical-align:top}
+  .tablewrap{overflow-x:auto;border-radius:10px;box-shadow:0 1px 4px rgba(16,42,82,.08);margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:14.5px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;font-size:13px}
+  td{padding:10px 14px;border-top:1px solid #eef2f7;vertical-align:top}
   tr:nth-child(even) td{background:#fafbfd}
-  .g{display:inline-block;min-width:26px;text-align:center;padding:2px 7px;border-radius:4px;
-     font-weight:700;font-size:12px}
-  .gA{background:var(--greenbg);color:var(--green)}
-  .gB{background:var(--light);color:var(--blue)}
-  .gC{background:var(--amberbg);color:var(--amber)}
-  .gP{background:#eef2f7;color:var(--gray)}
-  .gN{background:var(--amberbg);color:var(--amber)}
-  .ok{color:var(--green);font-weight:700}
-  .bad{color:var(--red);font-weight:700}
-  .close{color:var(--amber);font-weight:700}
-  .note{font-size:12.5px;color:var(--gray);margin-top:9px}
+  td a{color:var(--blue)}
+  .sub{font-weight:700;color:var(--navy);margin:20px 0 8px;font-size:16px}
+  .small{font-size:13.5px;color:var(--gray)}
 
-  .tl{border-left:2px solid var(--rule);margin-left:8px;padding-left:20px}
-  .tl .ev{position:relative;padding-bottom:18px}
-  .tl .ev::before{content:"";position:absolute;left:-27px;top:4px;width:11px;height:11px;
-       border-radius:50%;background:var(--blue);border:2px solid #f4f6f9}
-  .tl .ev.key::before{background:var(--orange)}
-  .tl .ev.done::before{background:var(--green)}
-  .tl .ev.online::before{background:var(--purple)}
-  .tl .d{font-weight:700;color:var(--navy);font-size:14px}
-  .tl .t{font-size:13.5px;color:var(--gray)}
+  .dates{list-style:none;padding:0;margin:0}
+  .dates li{display:flex;gap:14px;padding:10px 0;border-top:1px solid var(--rule)}
+  .dates li:first-child{border-top:0}
+  .dates .d{flex:0 0 120px;font-weight:700;color:var(--navy)}
 
-  .qbox{background:#fff;border-radius:9px;padding:16px 18px;box-shadow:0 1px 4px rgba(16,42,82,.07);
-        margin-bottom:12px;border-left:4px solid var(--orange)}
-  .qbox.done{border-left-color:var(--green)}
-  .qbox.info{border-left-color:var(--blue)}
-  .qbox h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
-  .qbox p{margin:0 0 8px;font-size:13.5px;color:var(--gray)}
-  .qbox ol,.qbox ul{margin:0;padding-left:20px;font-size:13.5px;color:var(--gray)}
-  .qbox li{margin-bottom:6px}
-  .qbox a{color:var(--blue)}
+  .online{background:#fff;border:2px dashed var(--rule);border-radius:10px;padding:18px 20px}
+  .online h2{font-size:20px}
 
-  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:12px}
-  .plan{background:#fff;border-radius:9px;padding:16px 18px;box-shadow:0 1px 4px rgba(16,42,82,.07);border-top:4px solid var(--blue)}
-  .plan h4{margin:0 0 2px;font-size:15.5px;color:var(--navy)}
-  .plan .tag{font-size:12px;color:var(--gray);margin:0 0 10px}
-  .plan dl{margin:0;font-size:13px}
-  .plan dt{font-weight:700;color:var(--ink);margin-top:8px}
-  .plan dd{margin:2px 0 0;color:var(--gray)}
-  footer{text-align:center;font-size:12px;color:#93a0b0;padding:26px 22px 34px}
+  footer{text-align:center;font-size:12.5px;color:#93a0b0;padding:10px 20px 34px}
+  @media (max-width:520px){ .dates li{flex-direction:column;gap:2px} .dates .d{flex:none} }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="hdrwrap">
+  <div class="inner">
     <div class="switch">
       <a href="index.html" class="on">University of Florida</a>
       <a href="fsu.html">Florida State</a>
     </div>
     <h1>Your Options at UF</h1>
-    <p>Every major checked against your actual transcript · Updated November 3, 2026</p>
+    <p>Checked against your eSantaFe record and UF's current rules · November 3, 2026</p>
   </div>
 </header>
 
-<div class="snap">
-  <div class="stat"><b>60</b><span>credits in December (54 done + 6 this fall)</span></div>
-  <div class="stat"><b>~3.11</b><span>your GPA on UF's scale · 3.0 is the line that matters</span></div>
-  <div class="stat"><b>Eligible</b><span>AA graduation, Fall 2026 · posts in December</span></div>
-  <div class="stat"><b id="readyCount">0</b><span>options you meet the courses for today</span></div>
-  <div class="stat"><b>Jan 25</b><span>earliest deadline (UF Online, Summer 2027)</span></div>
-</div>
+<main>
 
-<div class="wrap">
-
-<nav class="tabs">
-  <button class="on" data-tab="bets">Best Bets</button>
-  <button data-tab="majors">All Options</button>
-  <button data-tab="spring">Spring Classes</button>
-  <button data-tab="dates">Deadlines</button>
-  <button data-tab="next">What To Do</button>
-  <button data-tab="transcript">My Transcript</button>
-</nav>
-
-<!-- ================= BEST BETS ================= -->
-<section class="panel on" id="bets">
-  <h2>Being strategic about UF</h2>
-  <p class="sub">The goal is to apply where you have a real shot, not just where the name sounds right.</p>
-
-  <div class="qbox info">
-    <h4>You get two shots per cycle, not one</h4>
-    <ul>
-      <li>UF lets a transfer student apply to <b>one campus major per term</b>, and switching majors after you arrive is very unlikely. So the campus major you apply to is the one you graduate in.</li>
-      <li><b>UF Online is a separate application.</b> You can apply to one campus major and one UF Online major in the same cycle. UF Online degrees are full UF degrees, and the bars are usually lower.</li>
-      <li>The smart setup is <b>one campus application where you have a real chance, plus one UF Online application as a solid backup.</b></li>
-    </ul>
-  </div>
-
-  <div class="qbox">
-    <h4>Your fall grades decide the campus options</h4>
-    <p>UF recalculates your GPA on its own scale (a B+ counts 3.33, not 3.5), which puts you around <b>3.11</b> right now. Urban Sciences, PPEL, Criminology on campus, Sustainability, and the new Hamilton majors all need a <b>3.0</b>. Here is roughly where you land after College Algebra and Managerial Accounting:</p>
-    <div class="tablewrap">
-    <table>
-      <thead><tr><th>College Algebra</th><th>Managerial Accounting</th><th>UF GPA (approx.)</th><th>3.0 majors</th></tr></thead>
-      <tbody>
-        <tr><td>C</td><td>C</td><td>2.95</td><td class="bad">Closed</td></tr>
-        <tr><td>C</td><td>B</td><td>3.02</td><td class="close">Just clears</td></tr>
-        <tr><td>B</td><td>C</td><td>3.02</td><td class="close">Just clears</td></tr>
-        <tr><td>B</td><td>B</td><td>3.10</td><td class="ok">Open</td></tr>
-        <tr><td>C</td><td>A</td><td>3.10</td><td class="ok">Open</td></tr>
-        <tr><td>B</td><td>A</td><td>3.17</td><td class="ok">Open</td></tr>
-      </tbody>
-    </table>
-    </div>
-    <p class="note">Estimates. UF counts every attempt at every college. The 2.0 and 2.5 options (most of UF Online, Tourism, Sport Management minimums) stay open in every row.</p>
-  </div>
-
-  <h2>Three ways to play it</h2>
-  <p class="sub">Each pairs one campus application with one UF Online backup. These are starting points for Kai to react to, not a decision.</p>
-  <div class="plans">
-    <div class="plan">
-      <h4>A. Urban Sciences + Sport Management</h4>
-      <p class="tag">No extra classes needed for either</p>
-      <dl>
-        <dt>Campus</dt><dd>Urban Sciences and Planning. You meet every course requirement now. Needs the 3.0, and admission is space-available. Summer deadline Feb 1 or Fall May 1.</dd>
-        <dt>UF Online</dt><dd>Sport Management. You meet the requirements now, with a 2.0 overall minimum. The business side of sports: marketing, finance, management. Summer Jan 25 or Fall Apr 26.</dd>
-        <dt>Watch out for</dt><dd>Fall grades (the 3.0), and confirming that your two accounting courses count as UF's Financial Accounting.</dd>
-      </dl>
-    </div>
-    <div class="plan">
-      <h4>B. Tourism, Hospitality and Event Management</h4>
-      <p class="tag">Most business-flavored path without calculus</p>
-      <dl>
-        <dt>Campus</dt><dd>Tourism, Hospitality and Event Management, Fall 2027 (May 1). Needs Public Speaking plus Sociology or Psychology this spring. 2.0 minimum, but HHP calls campus transfer admission extremely competitive.</dd>
-        <dt>UF Online</dt><dd>The same major online (Apr 26), or Sport Management online as the backup.</dd>
-        <dt>Why it fits</dt><dd>The department offers an Entrepreneurship certificate and an AI and Data Analytics certificate, which line up with wanting to run your own business.</dd>
-      </dl>
-    </div>
-    <div class="plan">
-      <h4>C. Keep business alive through UF Online</h4>
-      <p class="tag">Only if you're up for Survey of Calculus in spring</p>
-      <dl>
-        <dt>UF Online</dt><dd>Business Administration (BSBA), Fall 2027 (Apr 26). The prerequisite GPA bar is 2.5, which you'd clear even with a C in calculus. Calculus is the one missing course.</dd>
-        <dt>Campus</dt><dd>Urban Sciences and Planning (Fall, May 1).</dd>
-        <dt>Honest risk</dt><dd>College Algebra has been a grind, and calculus builds on it. If calculus goes badly, this path closes, and a low grade drags the overall GPA under 3.0 for the campus pick too.</dd>
-      </dl>
-    </div>
-  </div>
-
-  <div class="qbox info">
-    <h4>Why on-campus business is off the table</h4>
-    <p>Warrington now requires a <b>3.0 GPA at each college you've attended</b>, not just overall. Your St. Petersburg College grades (two C's in English, one B) work out to about 2.33, so the Gainesville business degree is closed no matter how calculus goes. Your instinct about this was right.</p>
+<!-- WHERE YOU STAND -->
+<section>
+  <h2>Where you stand</h2>
+  <div class="facts">
+    <div class="fact"><b>December</b><span>Your AA finishes. Your graduation application is on file and marked eligible.</span></div>
+    <div class="fact"><b>About 3.11</b><span>Your GPA the way UF calculates it</span></div>
+    <div class="fact"><b>3.0</b><span>The GPA you need to keep for the best options below</span></div>
   </div>
 </section>
 
-<!-- ================= ALL OPTIONS ================= -->
-<section class="panel" id="majors">
-  <p class="sub"><span class="pill p-online">UF ONLINE</span> marks online programs (separate application, lower bars). <span class="pill p-new">NEW</span> marks options added in November.</p>
-  <div id="list"></div>
+<!-- DO THIS NOW -->
+<section>
+  <h2>Do these three things now</h2>
+  <div class="box urgent">
+    <ol>
+      <li><b>Get at least one B this fall</b> in College Algebra or Managerial Accounting. One B keeps you above 3.0. Two C's drops you to about 2.95, and that closes Urban Sciences, PPEL and Criminology.</li>
+      <li><b>Register for spring.</b> Registration is open and you aren't signed up for anything yet. Take these three:
+        <ul style="margin-top:8px">
+          <li><b>AMH 2020</b> US History since 1877, for the journalism majors</li>
+          <li><b>SPC 2608</b> Public Speaking, for Tourism and Hospitality</li>
+          <li><b>SYG 2000</b> Intro to Sociology, also for Tourism and Hospitality</li>
+        </ul>
+        <div style="margin-top:10px">Optional fourth: <b>EDF 1005</b> Intro to Teaching, which is all you need for Education Sciences.</div></li>
+      <li><b>Pick your one campus major by January.</b> UF only lets you apply to one campus major per term, and you're very unlikely to be able to switch after you get in.</li>
+    </ol>
+  </div>
 </section>
 
-<!-- ================= SPRING ================= -->
-<section class="panel" id="spring">
-  <h2>Spring 2027: what each class unlocks</h2>
-  <p class="sub">Registration for spring is open now in eSantaFe, and nothing is registered yet. Every one of these is a standard Santa Fe course, but check open sections when you register.</p>
-  <div class="tablewrap">
-  <table>
-    <thead><tr><th>Class</th><th>What it opens at UF</th></tr></thead>
+<!-- BEST CAMPUS OPTIONS -->
+<section>
+  <h2>Your best campus options</h2>
+  <p class="lead">Ranked by how good your chances are, not by how the major sounds.</p>
+
+  <div class="opt good">
+    <div class="opthead"><h3>Urban Sciences and Planning</h3><span class="chance">Good chances</span></div>
+    <p class="what">How cities work: planning, economics, policy and data. Jobs in city planning and urban data analysis.</p>
+    <p class="row"><b>You have:</b> everything it requires.</p>
+    <p class="row"><b>You need:</b> to keep your GPA at 3.0 or higher.</p>
+    <p class="row"><b>Apply by:</b> Feb 1 to start in summer, or May 1 to start in fall.</p>
+    <p class="row"><a href="https://dcp.ufl.edu/admissions/busp/" target="_blank" rel="noopener">UF page</a> · questions: <a href="mailto:advising@dcp.ufl.edu">advising@dcp.ufl.edu</a></p>
+  </div>
+
+  <div class="opt good">
+    <div class="opthead"><h3>Education Sciences</h3><span class="chance">Good chances</span></div>
+    <p class="what">Education without becoming a classroom teacher. Jobs in training, education technology, policy and nonprofits.</p>
+    <p class="row"><b>You have:</b> nothing yet.</p>
+    <p class="row"><b>You need:</b> one class, EDF 1005 Intro to Teaching, with a C or better. It only needs a 2.0 GPA, and it doesn't cap how many students it takes.</p>
+    <p class="row"><b>Apply by:</b> May 1 for fall.</p>
+    <p class="row"><a href="https://catalog.ufl.edu/UGRD/colleges-schools/UGEDU/" target="_blank" rel="noopener">UF page</a></p>
+  </div>
+
+  <div class="opt maybe">
+    <div class="opthead"><h3>Advertising, Public Relations, Journalism, or Media Production</h3><span class="chance">Decent chances</span></div>
+    <p class="what">Four majors in the journalism college. Advertising is the most business-like: brands, marketing and campaigns.</p>
+    <p class="row"><b>You have:</b> four of the five required classes.</p>
+    <p class="row"><b>You need:</b> AMH 2020 US History since 1877 this spring. The minimum GPA is 2.0, and the college says 2.5 makes you competitive, so you're above that.</p>
+    <p class="row"><b>Apply by:</b> May 1 for fall.</p>
+    <p class="row"><a href="https://www.jou.ufl.edu/admissions/undergraduate-admissions/" target="_blank" rel="noopener">UF page</a> · questions: 352-392-0466</p>
+  </div>
+
+  <div class="opt maybe">
+    <div class="opthead"><h3>PPEL (Philosophy, Politics, Economics and Law)</h3><span class="chance">Possible</span></div>
+    <p class="what">Economics, government and law together. A common path to law school.</p>
+    <p class="row"><b>You have:</b> everything it requires.</p>
+    <p class="row"><b>You need:</b> a 3.0 GPA. They take a limited number of students, so qualifying doesn't guarantee a spot.</p>
+    <p class="row"><b>Apply by:</b> they don't post dates; ask them.</p>
+    <p class="row"><a href="https://hamilton.ufl.edu/admissions-requirements/" target="_blank" rel="noopener">UF page</a> · questions: <a href="mailto:hamilton-advising@ufl.edu">hamilton-advising@ufl.edu</a></p>
+  </div>
+
+  <div class="opt maybe">
+    <div class="opthead"><h3>Criminology</h3><span class="chance">Possible</span></div>
+    <p class="what">Crime, law and the justice system. Leads to law school, courts, law enforcement or policy work.</p>
+    <p class="row"><b>You have:</b> everything it requires.</p>
+    <p class="row"><b>You need:</b> a 3.0 GPA. Most students they take are at 3.0 or above, so you'd be right at the line.</p>
+    <p class="row"><b>Apply by:</b> May 1 for fall, or Feb 15 for summer.</p>
+    <p class="row"><a href="https://www.advising.ufl.edu/admissions/transfer-admissions/" target="_blank" rel="noopener">UF page</a></p>
+  </div>
+
+  <div class="opt hard">
+    <div class="opthead"><h3>Tourism, Hospitality and Event Management</h3><span class="chance">Hard</span></div>
+    <p class="what">Hotels, events and tourism businesses. Has an Entrepreneurship certificate, which fits wanting to run your own business.</p>
+    <p class="row"><b>You have:</b> the economics requirement.</p>
+    <p class="row"><b>You need:</b> Public Speaking plus Sociology or Psychology this spring. The minimum GPA is only 2.0, but UF says campus spots are very competitive, and both classes would still be in progress when you apply.</p>
+    <p class="row"><b>Apply by:</b> May 1 for fall. No summer start.</p>
+    <p class="row"><a href="https://catalog.ufl.edu/UGRD/colleges-schools/UGHHU/TRM_BSTM/" target="_blank" rel="noopener">UF page</a> · questions: 352-392-0578</p>
+  </div>
+
+  <div class="opt hard">
+    <div class="opthead"><h3>Sport Management</h3><span class="chance">Hard</span></div>
+    <p class="what">The business side of sports: marketing, finance and management.</p>
+    <p class="row"><b>You have:</b> everything it requires (economics, plus your two accounting classes).</p>
+    <p class="row"><b>You need:</b> a much higher GPA to compete. Students who get in usually have about a 3.5.</p>
+    <p class="row"><b>Apply by:</b> May 1 for fall.</p>
+    <p class="row"><a href="https://hhp.ufl.edu/admissions/transfer-to-hhp/" target="_blank" rel="noopener">UF page</a> · questions: 352-392-0578</p>
+  </div>
+</section>
+
+<!-- OTHER CAMPUS MAJORS -->
+<section>
+  <h2>Other campus majors you could reach</h2>
+  <p class="lead">Less likely to be a fit, but open to you.</p>
+
+  <p class="sub">You qualify now</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Major</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td><b>AMH 2020</b><br>US History since 1877</td><td>All four journalism majors, campus and UF Online (Advertising, Public Relations, Journalism, Media Production, Management and Technology). One of two needed for African American Studies.</td></tr>
-      <tr><td><b>SPC 2608</b><br>Public Speaking</td><td>One of the two missing pieces for Tourism, Hospitality and Event Management. Also counts as an elective inside the Urban Sciences degree.</td></tr>
-      <tr><td><b>SYG 2000</b><br>Intro to Sociology</td><td>The other Tourism piece. Also counts for African American Studies, Sociology, and Family, Youth and Community Sciences.</td></tr>
-      <tr><td><b>PSY 2012</b><br>General Psychology</td><td>Can replace Sociology for Tourism. Recommended for Sport Management. Required for Public Health and Agricultural Education and Communication.</td></tr>
-      <tr><td><b>EDF 1005</b><br>Intro to the Teaching Profession</td><td>The entire requirement for Education Sciences, campus and UF Online (including the Educational Technology track).</td></tr>
-      <tr><td><b>MAC 2233</b><br>Survey of Calculus</td><td>The only path to UF Online business (BSBA), Economics, or Food and Resource Economics. Not needed for anything else here.</td></tr>
+      <tr><td>English</td><td>Depends on whether UF counts your AP Literature credit as two classes or one. Ask before counting on it.</td></tr>
+      <tr><td>New Hamilton majors (War, Statecraft and Strategy; American Government and Law; Great Books)</td><td>Brand new this year. Need a 3.0. Ask Hamilton how they handle transfer students.</td></tr>
     </tbody>
-  </table>
-  </div>
+  </table></div>
 
-  <div class="qbox" style="margin-top:16px">
-    <h4>Suggested spring if business is off the table</h4>
-    <ul>
-      <li><b>AMH 2020 + SPC 2608 + SYG 2000.</b> That combination opens every journalism major, Tourism (campus and online), and African American Studies, on top of everything you already qualify for. It roughly doubles your options.</li>
-      <li>Add <b>EDF 1005</b> as a fourth class if Education Sciences or ed tech interests you at all.</li>
-      <li>If you want to keep UF Online business open, swap one of the three for <b>MAC 2233</b>.</li>
-      <li>Three or four classes keeps your Pell Grant money up. Two classes cuts it roughly in half.</li>
-    </ul>
-  </div>
+  <p class="sub">One more class</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Major</th><th>Class you'd need</th></tr></thead>
+    <tbody>
+      <tr><td>Geography</td><td>One geography class (not GEA 1000)</td></tr>
+      <tr><td>Sustainability and the Built Environment</td><td>Precalculus (MAC 1147). Needs a 3.0.</td></tr>
+    </tbody>
+  </table></div>
 
-  <div class="qbox info">
-    <h4>One timing catch</h4>
-    <ul>
-      <li>Liberal Arts (CLAS) wants at least <b>half</b> of a major's prerequisites finished with grades when it reviews your application. Spring classes will still be in progress at the May 1 deadline. Majors you already qualify for don't have this problem; for new ones, ask CLAS advising whether spring grades posting in May is good enough.</li>
-      <li>HHP (Tourism, Sport Management) prefers applicants who have finished most prerequisites. For Tourism you'd have one of three done at application.</li>
+  <p class="sub">Two more classes</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Major</th><th>Classes you'd need</th></tr></thead>
+    <tbody>
+      <tr><td>History</td><td>Probably two history classes. UF may not count your AP World History.</td></tr>
+      <tr><td>African American Studies</td><td>US History since 1877 and Intro to Sociology (the suggested spring classes cover it)</td></tr>
+      <tr><td>Political Science</td><td>Two of: Comparative Politics, International Relations, Political Theory</td></tr>
+      <tr><td>Sociology</td><td>Two sociology classes</td></tr>
+      <tr><td>Anthropology</td><td>Two anthropology classes</td></tr>
+      <tr><td>Philosophy</td><td>Two philosophy classes</td></tr>
+      <tr><td>Religion</td><td>Two religion classes</td></tr>
+      <tr><td>Women's Studies</td><td>Two women's studies or gender-focused classes</td></tr>
+      <tr><td>Linguistics</td><td>Two linguistics classes, or two semesters of one language</td></tr>
+      <tr><td>Sustainability Studies</td><td>Two of: Social Problems, Physical Geology, Biology 2. Needs a 3.0.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">For majors where you'd be taking both classes in spring, the Liberal Arts college wants at least half of them finished when it reviews you. Ask before planning around one of these.</p>
+</section>
+
+<!-- NOT POSSIBLE -->
+<section>
+  <h2>Not possible on campus</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Major</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><b>Business (Warrington)</b></td><td>UF now requires a 3.0 at every college you've attended. Your St. Petersburg College GPA is about 2.33, so this is closed no matter what.</td></tr>
+      <tr><td>Economics, Food and Resource Economics</td><td>Need Survey of Calculus. Economics also needs a 3.0 and is very competitive.</td></tr>
+      <tr><td>Computer Science, Data Science, Statistics</td><td>Need three semesters of calculus.</td></tr>
+      <tr><td>Psychology</td><td>On campus, students who get in usually have about a 3.5.</td></tr>
+      <tr><td>Nursing, Public Health, Health Science</td><td>Need several science classes with labs.</td></tr>
+      <tr><td>Engineering, Construction Management</td><td>Need calculus and physics.</td></tr>
+      <tr><td>Art, Music, Dance, Digital Arts</td><td>Need a portfolio or an audition.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- DATES -->
+<section>
+  <h2>Key dates</h2>
+  <p class="lead">UF hasn't posted its 2027 campus dates yet. These follow last year's dates, so check them again in January.</p>
+  <div class="box">
+    <ul class="dates">
+      <li><span class="d">This month</span><span>Register for spring classes.</span></li>
+      <li><span class="d">Dec 7 to 12</span><span>Fall finals. These grades set the GPA UF will see.</span></li>
+      <li><span class="d">December</span><span>AA is awarded.</span></li>
+      <li><span class="d">Feb 1, 2027</span><span>Urban Sciences deadline for a summer start.</span></li>
+      <li><span class="d">Feb 15, 2027</span><span>Summer deadline for most other majors.</span></li>
+      <li><span class="d">May 1, 2027</span><span><b>Main fall deadline.</b> Applies to almost every major on this page.</span></li>
+      <li><span class="d">May 15, 2027</span><span>Final transcripts due, with spring grades.</span></li>
+      <li><span class="d">By Jun 15, 2027</span><span>Fall decisions (many come earlier).</span></li>
+      <li><span class="d">Aug 19, 2027</span><span>UF fall classes start.</span></li>
     </ul>
   </div>
 </section>
 
-<!-- ================= DATES ================= -->
-<section class="panel" id="dates">
-  <h2>Dates that matter</h2>
-  <p class="sub">UF hasn't posted its 2027 campus transfer dates yet, so campus dates marked "expected" follow the 2026 pattern. UF Online's 2027 dates are posted. <span style="color:var(--purple);font-weight:700">Purple</span> = UF Online.</p>
-  <div class="tl" id="tl"></div>
-</section>
-
-<!-- ================= NEXT ================= -->
-<section class="panel" id="next">
-  <h2>What to do</h2>
-  <p class="sub">Short list, in order.</p>
-
-  <div class="qbox done">
-    <h4>Already done ✓</h4>
+<!-- WHO TO ASK -->
+<section>
+  <h2>Who to ask</h2>
+  <div class="box">
     <ul>
-      <li>AA graduation application on file for Fall 2026, status <b>Eligible</b> (checked Nov 3). The degree posts in December, and Florida AA graduates get transfer priority at UF.</li>
-    </ul>
-  </div>
-
-  <div class="qbox">
-    <h4>1. Finish fall strong</h4>
-    <ul>
-      <li><b>Pass College Algebra.</b> It completes the AA. No AA, no transfer.</li>
-      <li>A B in either College Algebra or Managerial Accounting keeps every 3.0 option open. Two C's closes them. See Best Bets for the math.</li>
-    </ul>
-  </div>
-
-  <div class="qbox">
-    <h4>2. Register for spring this month</h4>
-    <ul>
-      <li>See the Spring Classes tab. The default suggestion is US History since 1877, Public Speaking, and Intro to Sociology.</li>
-      <li>Santa Fe advisor: Shilah Carroll, <a href="mailto:shilah.carroll@go.sfcollege.edu">shilah.carroll@go.sfcollege.edu</a>, (352) 381-7122, Northwest campus R-201E.</li>
-    </ul>
-  </div>
-
-  <div class="qbox">
-    <h4>3. Emails worth sending, and send them yourself</h4>
-    <ul>
-      <li><b>Urban Sciences:</b> <a href="mailto:advising@dcp.ufl.edu">advising@dcp.ufl.edu</a> (program specialist Vanessa Niblett, <a href="mailto:vniblett@dcp.ufl.edu">vniblett@dcp.ufl.edu</a>). Ask whether your AP credit covers the macroeconomics and American Government requirements, and what makes a transfer applicant competitive for a space-available seat.</li>
-      <li><b>Sport Management and Tourism (HHP):</b> call (352) 392-0578. Ask whether Santa Fe's ACG 2001 + ACG 2011 counts as Financial Accounting (ACG 2021), and whether the catalog's longer course list still applies.</li>
-      <li><b>Hamilton School:</b> <a href="mailto:hamilton-advising@ufl.edu">hamilton-advising@ufl.edu</a>. Ask which terms PPEL and the new majors admit transfers, and whether transfers can take the Hamilton-only courses after they arrive.</li>
-      <li><b>Liberal Arts (Criminology, English, History):</b> drop-in Zoom advising six times a week, no appointment. Ask whether UF honors Santa Fe's AP course numbers or re-maps them (this affects English and History), and about the half-done rule. <a href="https://www.advising.ufl.edu/admissions/transfer-admissions/" target="_blank" rel="noopener">See the schedule</a>.</li>
-    </ul>
-  </div>
-
-  <div class="qbox">
-    <h4>4. Decide on the two applications by January</h4>
-    <ul>
-      <li>The first real deadline is <b>Jan 25</b> (UF Online, Summer 2027), then <b>Feb 1</b> for Urban Sciences summer. Fall gives more room: Apr 26 for UF Online, May 1 (expected) for campus.</li>
-      <li>Prerequisite courses can't be taken at UF after admission. Everything for the major you pick has to be finished first.</li>
+      <li><b>Santa Fe advisor</b> (spring classes): Shilah Carroll, <a href="mailto:shilah.carroll@go.sfcollege.edu">shilah.carroll@go.sfcollege.edu</a>, 352-381-7122</li>
+      <li><b>Urban Sciences:</b> <a href="mailto:advising@dcp.ufl.edu">advising@dcp.ufl.edu</a>. Ask what makes a transfer student stand out.</li>
+      <li><b>PPEL and the Hamilton majors:</b> <a href="mailto:hamilton-advising@ufl.edu">hamilton-advising@ufl.edu</a>. Ask when they take transfer students.</li>
+      <li><b>Criminology, English, History:</b> UF Liberal Arts has drop-in Zoom advising six times a week. <a href="https://www.advising.ufl.edu/admissions/transfer-admissions/" target="_blank" rel="noopener">Schedule here.</a> Ask how UF counts your AP credits.</li>
+      <li><b>Sport Management and Tourism:</b> 352-392-0578. Ask whether your two accounting classes count as their Financial Accounting requirement.</li>
     </ul>
   </div>
 </section>
 
-<!-- ================= TRANSCRIPT ================= -->
-<section class="panel" id="transcript">
-  <h2>What you have completed</h2>
-  <p class="sub">From your eSantaFe degree audit, Nov 3, 2026. "P" means credit from an AP exam, which counts for the course but carries no letter grade.</p>
-  <div class="tablewrap">
-  <table>
-    <thead><tr><th>Course</th><th>Title</th><th>Grade</th><th>When</th><th>Where</th></tr></thead>
-    <tbody id="tbody"></tbody>
-  </table>
+<!-- ONLINE -->
+<section>
+  <div class="online">
+    <h2>Backup: UF Online</h2>
+    <p class="lead">Separate from everything above. You can apply to one campus major and one online major at the same time, so an online application is a safety net if the campus one doesn't work out. It's the same UF degree, with lower GPA requirements. Online deadlines: <b>Jan 25</b> to start in summer, <b>Apr 26</b> to start in fall.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Online major</th><th>What you'd need</th><th>Chances</th></tr></thead>
+      <tbody>
+        <tr><td>Sport Management</td><td>Nothing more. Minimum GPA 2.0.</td><td>Good</td></tr>
+        <tr><td>Criminology</td><td>Nothing more. Minimum GPA 2.5.</td><td>Good</td></tr>
+        <tr><td>Emergency Services</td><td>Nothing more. Minimum GPA 2.3. Narrow field.</td><td>Good</td></tr>
+        <tr><td>Media Production, Advertising, Public Relations</td><td>US History since 1877</td><td>Good</td></tr>
+        <tr><td>Education Sciences (Educational Technology)</td><td>EDF 1005 Intro to Teaching. Minimum GPA 2.5.</td><td>Good</td></tr>
+        <tr><td>Tourism, Hospitality and Event Management</td><td>Public Speaking, plus Sociology or Psychology</td><td>Good</td></tr>
+        <tr><td>Business Administration</td><td>Survey of Calculus. The only business degree still open to you.</td><td>Depends on calculus</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small"><a href="https://ufonline.ufl.edu/degrees/undergraduate/" target="_blank" rel="noopener">All UF Online degrees</a></p>
   </div>
-  <p class="note"><b>Why this matters:</b> Statistics, Macroeconomics, Microeconomics, and American Federal Government are doing the most work for you. That combination unlocks Urban Sciences and Planning, PPEL, and Criminology. Your accounting pair (ACG 2001 + 2011) is what unlocks Sport Management.</p>
-  <p class="note"><b>Two caveats:</b> UF uses its own AP chart, which maps AP English Literature and AP World History differently than Santa Fe does, so the English and History cards need confirming. And the St. Petersburg College grades are what close on-campus business.</p>
 </section>
 
-</div>
+<!-- TRANSCRIPT -->
+<section>
+  <h2>Your classes so far</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Class</th><th>Grade</th><th>Where</th></tr></thead>
+    <tbody>
+      <tr><td>ENC 1101 College Composition 1</td><td>C</td><td>St. Petersburg College</td></tr>
+      <tr><td>ENC 1102 College Composition 2</td><td>C</td><td>St. Petersburg College</td></tr>
+      <tr><td>SLS 1301 Life and Career Development</td><td>B</td><td>St. Petersburg College</td></tr>
+      <tr><td>AST 1002 Astronomy</td><td>B</td><td>Santa Fe</td></tr>
+      <tr><td>CGS 1000 Intro to College Computing</td><td>A</td><td>Santa Fe</td></tr>
+      <tr><td>ECO 2023 Microeconomics</td><td>B</td><td>Santa Fe</td></tr>
+      <tr><td>MAT 1033 Intermediate Algebra</td><td>B</td><td>Santa Fe</td></tr>
+      <tr><td>ACG 2001 Accounting 1</td><td>A</td><td>Santa Fe</td></tr>
+      <tr><td>CGS 2100 Computer Applications for Business</td><td>A</td><td>Santa Fe</td></tr>
+      <tr><td>EVR 1001 Environmental Science</td><td>B</td><td>Santa Fe</td></tr>
+      <tr><td>STA 2023 Statistics</td><td>B</td><td>Santa Fe</td></tr>
+      <tr><td>ACG 2011 Accounting 2</td><td>B+</td><td>Santa Fe</td></tr>
+      <tr><td>MAC 1105 College Algebra</td><td>This fall</td><td>Santa Fe</td></tr>
+      <tr><td>ACG 2071 Managerial Accounting</td><td>This fall</td><td>Santa Fe</td></tr>
+      <tr><td>AP credit: American Government, Macroeconomics, World History, Literature (2), Humanities</td><td>Credit</td><td>AP exams</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
 
 <footer>
-  Built from your eSantaFe records and UF's published 2026-27 transfer requirements, November 3, 2026.<br>
   Requirements change. Confirm anything important with a UF advisor before relying on it.
 </footer>
-
-<script>
-/* ---------- transcript ---------- */
-const TRANSCRIPT = [
-  ["WOH 2022","World History 2","P","Summer 2023","AP exam"],
-  ["LIT 2000","Literature Appreciation","P","Spring 2024","AP exam"],
-  ["AML 2020","Survey of American Literature 2","P","Spring 2024","AP exam"],
-  ["HSS 9001C","Humanities / Social Science","P","Spring 2024","AP exam"],
-  ["ENC 1101","College Composition 1","C","Fall 2024","St. Petersburg College"],
-  ["ENC 1102","College Composition 2","C","Spring 2025","St. Petersburg College"],
-  ["POS 2041","American Federal Government","P","Spring 2025","AP exam"],
-  ["ECO 2013","Principles of Macroeconomics","P","Spring 2025","AP exam"],
-  ["SLS 1301","Life / Career Development","B","Spring 2025","St. Petersburg College"],
-  ["AST 1002","Astronomy","B","Fall 2025","Santa Fe"],
-  ["CGS 1000","Introduction to College Computing","A","Fall 2025","Santa Fe"],
-  ["ECO 2023","Principles of Microeconomics","B","Fall 2025","Santa Fe"],
-  ["MAT 1033","Intermediate Algebra","B","Fall 2025","Santa Fe"],
-  ["ACG 2001","Principles of Accounting 1","A","Spring 2026","Santa Fe"],
-  ["CGS 2100","Computer Applications for Business","A","Spring 2026","Santa Fe"],
-  ["EVR 1001","Introduction to Environmental Science","B","Spring 2026","Santa Fe"],
-  ["STA 2023","Introduction to Statistics","B","Spring 2026","Santa Fe"],
-  ["ACG 2011","Principles of Accounting 2","B+","Summer 2026","Santa Fe"],
-  ["MAC 1105","College Algebra","IN PROGRESS","Fall 2026","Santa Fe"],
-  ["ACG 2071","Managerial Accounting","IN PROGRESS","Fall 2026","Santa Fe"]
-];
-const tb = document.getElementById('tbody');
-TRANSCRIPT.forEach(r=>{
-  let cls='gP';
-  if(r[2]==='A') cls='gA';
-  else if(r[2][0]==='B') cls='gB';
-  else if(r[2]==='C') cls='gC';
-  else if(r[2]==='IN PROGRESS') cls='gN';
-  tb.insertAdjacentHTML('beforeend',
-    `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><span class="g ${cls}">${r[2]}</span></td><td>${r[3]}</td><td>${r[4]}</td></tr>`);
-});
-
-/* ---------- groups ---------- */
-const GROUPS = [
-  {g:0, h:"Ready to apply now",          note:"You already meet every course requirement. GPA and competition are what's left.", pill:"READY NOW", pc:"p-ready"},
-  {g:1, h:"One more class",              note:"A single spring course opens each of these.", pill:"1 CLASS", pc:"p-need"},
-  {g:2, h:"Two more classes",            note:"Doable in one spring semester, with the timing catch on the Spring Classes tab.", pill:"2 CLASSES", pc:"p-need"},
-  {g:3, h:"Three more classes",          note:"A bigger lift, listed so you know they exist.", pill:"3 CLASSES", pc:"p-need"},
-  {g:4, h:"Requires Survey of Calculus", note:"The business and economics track. Calculus is the missing piece for all of these.", pill:"NEEDS CALCULUS", pc:"p-calc"},
-  {g:5, h:"Ruled out, and why",          note:"Listed so nothing is a surprise later.", pill:"NOT A FIT", pc:"p-fall"}
-];
-
-const CLAS_DL = "Fall: May 1 · Summer: Feb 15 (expected 2027 dates)";
-const CLAS_LINK = "https://www.advising.ufl.edu/admissions/transfer-admissions/";
-const CLAS_MAIL = "clastransfer@advising.ufl.edu";
-const ONLINE_DL = "Summer: Jan 25 · Fall: Apr 26, 2027";
-const JOU_HAVE = "College Composition 2, American Federal Government, Statistics, Macroeconomics. Four of five.";
-
-const MAJORS = [
-  /* ---------- READY NOW ---------- */
-  {g:0, star:true, n:"Urban Sciences and Planning", c:"College of Design, Construction and Planning",
-   d:"Economics, policy, governance and data analysis applied to cities. Careers in planning and urban data analytics. There's a 4+1 option to add a master's in a fifth year.",
-   have:"Statistics, Macroeconomics, Microeconomics, American Federal Government",
-   odds:"Your strongest campus option. You meet every course requirement. It comes down to the 3.0 and how many seats open up.",
-   gpa:"3.0 overall, C or better in each course", dl:"Summer: Feb 1 · Fall: May 1 · no spring intake",
-   link:"https://dcp.ufl.edu/admissions/busp/", contact:"advising@dcp.ufl.edu",
-   warn:"Admission is space-available."},
-
-  {g:0, star:true, online:true, isNew:true, n:"Sport Management (UF Online)", c:"Health and Human Performance",
-   d:"Management, marketing, finance and law applied to sport organizations. The closest thing to a business degree you can reach without calculus.",
-   have:"Macroeconomics or Microeconomics, plus Financial Accounting (your ACG 2001 + 2011)",
-   odds:"Strong. The minimums are 2.2 in the prerequisites and 2.0 overall, and no higher competitive GPA is published for online.",
-   gpa:"2.2 prerequisite, 2.0 overall", dl:ONLINE_DL,
-   link:"https://ufonline.ufl.edu/degrees/undergraduate/sport-management/", contact:"(352) 392-0578",
-   warn:"Confirm with HHP that ACG 2001 + ACG 2011 counts as ACG 2021. UF's agriculture college already accepts that pair."},
-
-  {g:0, online:true, isNew:true, n:"Criminology (UF Online)", c:"Liberal Arts and Sciences",
-   d:"Law, crime and the justice system. The online version has a lower bar than campus.",
-   have:"Statistics, plus Macroeconomics, Microeconomics and American Federal Government from the approved list",
-   odds:"Strong. 2.5 overall clears in every fall scenario.",
-   gpa:"2.5 overall, 2.5 in those courses", dl:ONLINE_DL,
-   link:"https://ufonline.ufl.edu/degrees/undergraduate/criminology/", contact:CLAS_MAIL,
-   warn:"Confirm that AP credits (no letter grade) count toward the nine required credits."},
-
-  {g:0, star:true, n:"Philosophy, Politics, Economics and Law (PPEL)", c:"Hamilton School",
-   d:"Economics, government, philosophy and legal reasoning combined. A common pre-law path that uses your economics background.",
-   have:"Macroeconomics, Microeconomics, Statistics",
-   odds:"Possible, but pool-based: qualified applicants compete for limited spots, and the 3.0 cushion is thin.",
-   gpa:"3.0 overall, 2.5 in those three courses", dl:"Selected each term; Hamilton doesn't publish dates (ask)",
-   link:"https://hamilton.ufl.edu/admissions-requirements/", contact:"hamilton-advising@ufl.edu"},
-
-  {g:0, isNew:true, n:"Hamilton School's new majors", c:"Hamilton School · new for 2026-27",
-   d:"Three new majors: War, Statecraft and Strategy (aimed at government, policy and consulting careers); American Government, History, Literature and Law; and Great Books and Ideas.",
-   have:"Hamilton's only published transfer requirement is the 3.0 GPA",
-   odds:"Unknown. These are brand new, and their tracking courses only exist at UF.",
-   gpa:"3.0 overall, pool-based", dl:"Ask Hamilton",
-   link:"https://catalog.ufl.edu/UGRD/colleges-schools/hamilton/WSS_BA/", contact:"hamilton-advising@ufl.edu",
-   warn:"Ask whether transfers are admitted on GPA alone and take the Hamilton-only courses after arriving."},
-
-  {g:0, n:"Criminology (campus)", c:"Liberal Arts and Sciences",
-   d:"Law, crime and the justice system. Leads to law school, courts, law enforcement, or policy research.",
-   have:"Statistics, plus Macroeconomics, Microeconomics and American Federal Government from the approved list",
-   odds:"Competitive. UF describes 3.0 as the typical admitted level, so it's a reach unless fall goes well.",
-   gpa:"Typically 3.0 overall, 2.75 in those courses", dl:CLAS_DL,
-   link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:0, n:"Sport Management (campus)", c:"Health and Human Performance",
-   d:"The same degree in Gainesville. Requirements dropped this fall to just economics and financial accounting.",
-   have:"Macroeconomics or Microeconomics, plus Financial Accounting (your ACG 2001 + 2011)",
-   odds:"Long shot. The minimum is 2.0, but competitive applicants are around 3.5. Online is the realistic version.",
-   gpa:"2.2 prerequisite, 2.0 overall; competitive about 3.5", dl:"Fall: May 1 · Spring only otherwise, no summer",
-   link:"https://hhp.ufl.edu/admissions/transfer-to-hhp/", contact:"(352) 392-0578",
-   warn:"UF's catalog still lists a longer course list than HHP's own page. Confirm with HHP."},
-
-  {g:0, n:"English", c:"Liberal Arts and Sciences",
-   d:"Literature and writing.",
-   have:"Possibly. Santa Fe posted your AP credit as LIT 2000 and AML 2020, which would cover it.",
-   odds:"Uncertain. UF's own AP chart maps AP Literature to a single course, which would leave you one short.",
-   gpa:"2.5 overall", dl:CLAS_DL,
-   link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:0, online:true, n:"Emergency Services (UF Online)", c:"Design, Construction and Planning",
-   d:"Online degree for emergency management and fire service leadership. No course prerequisites at all, though it's a narrow field.",
-   have:"No prerequisites required",
-   gpa:"2.3 overall", dl:"Use Jan 25 (Summer) or Apr 26 (Fall); the program page lists later dates",
-   link:"https://dcp.ufl.edu/rinker/academics/es/undergraduate/prospective-students/", contact:"FESUndergraduate@dcp.ufl.edu"},
-
-  /* ---------- ONE CLASS ---------- */
-  {g:1, online:true, isNew:true, n:"Media Production, Management and Technology (UF Online)", c:"Journalism and Communications",
-   d:"The Media Management and Technology track is the most business and tech flavored journalism option. The other UF Online journalism majors (Advertising, Public Relations, Sports and Media) have the same requirements.",
-   have:JOU_HAVE, needs:"US History since 1877 (AMH 2020)",
-   odds:"Good once AMH 2020 is done. 2.5 is the stated competitive level.",
-   gpa:"2.0 required, 2.5 competitive", dl:ONLINE_DL,
-   link:"https://ufonline.ufl.edu/degrees/undergraduate/media-production-management-technology/", contact:"advising@jou.ufl.edu"},
-
-  {g:1, n:"Advertising", c:"Journalism and Communications",
-   d:"Brand strategy, consumer research and campaigns. The most business-adjacent major in the journalism college.",
-   have:JOU_HAVE, needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.0 required, 2.5 competitive", dl:"Fall: May 1 · Summer A: Feb 15 (expected)",
-   link:"https://www.jou.ufl.edu/admissions/undergraduate-admissions/", contact:"advising@jou.ufl.edu",
-   warn:"Limited access, space-available. Applicants with 90 or more transfer credits aren't considered, and whether AP counts toward that isn't published. The catalog also lists MMC 1009 as a tracking course, which the college's own handout doesn't. Call 352-392-0466 to sort it out."},
-
-  {g:1, n:"Public Relations", c:"Journalism and Communications",
-   d:"Communications strategy, media relations, crisis and reputation management.",
-   have:JOU_HAVE, needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.0 required, 2.5 competitive", dl:"Fall: May 1 · Summer A: Feb 15 (expected)",
-   link:"https://www.jou.ufl.edu/admissions/undergraduate-admissions/", contact:"advising@jou.ufl.edu",
-   warn:"Same MMC 1009 question as Advertising."},
-
-  {g:1, n:"Journalism", c:"Journalism and Communications",
-   d:"Reporting and news writing across print, digital and broadcast.",
-   have:JOU_HAVE, needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.0 required, 2.5 competitive", dl:"Fall: May 1 · Summer A: Feb 15 (expected)",
-   link:"https://www.jou.ufl.edu/admissions/undergraduate-admissions/", contact:"advising@jou.ufl.edu"},
-
-  {g:1, n:"Media Production, Management and Technology (campus)", c:"Journalism and Communications",
-   d:"The production and business side of media, including management and technology.",
-   have:JOU_HAVE, needs:"US History since 1877 (AMH 2020)",
-   gpa:"2.0 required, 2.5 competitive", dl:"Fall: May 1 · Summer A: Feb 15 (expected)",
-   link:"https://www.jou.ufl.edu/admissions/undergraduate-admissions/", contact:"advising@jou.ufl.edu",
-   warn:"Same MMC 1009 question as Advertising."},
-
-  {g:1, online:true, isNew:true, n:"Education Sciences (UF Online, Educational Technology)", c:"College of Education",
-   d:"Education without a teaching certificate. The ed tech specialization leads to instructional design and training roles, with a 4+1 path to an online master's in Educational Technology.",
-   have:"General education coursework", needs:"Intro to the Teaching Profession (EDF 1005), C or better",
-   gpa:"2.5 overall", dl:ONLINE_DL,
-   link:"https://ufonline.ufl.edu/degrees/undergraduate/education-sciences/", contact:"studenthelp@coe.ufl.edu"},
-
-  {g:1, n:"Education Sciences (campus)", c:"College of Education",
-   d:"Leads to policy, training, ed tech and nonprofit work. No state teaching exam required. Not a limited-access program.",
-   have:"General education coursework", needs:"Intro to the Teaching Profession (EDF 1005), C or better. That is the entire requirement.",
-   gpa:"2.0 overall", dl:"Fall: May 1 · Summer: Feb 15 (expected)",
-   link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGEDU/", contact:"studenthelp@coe.ufl.edu"},
-
-  {g:1, n:"Sustainability and the Built Environment", c:"Design, Construction and Planning",
-   d:"Sustainable development and planning. Closely related to Urban Sciences.",
-   have:"Statistics, Macroeconomics, Microeconomics", needs:"Precalculus (MAC 1147, or MAC 1140 plus MAC 1114)",
-   gpa:"3.0 overall", dl:"Summer: Feb 1 · Fall: May 1",
-   link:"https://dcp.ufl.edu/admissions/sbe-advising/", contact:"advising@dcp.ufl.edu"},
-
-  {g:1, n:"Geography", c:"Liberal Arts and Sciences",
-   d:"Includes mapping and spatial analysis, which overlaps with urban planning.",
-   have:"Statistics", needs:"One geography course (GEA 1000 is not accepted)",
-   gpa:"2.5 overall", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  /* ---------- TWO CLASSES ---------- */
-  {g:2, star:true, isNew:true, n:"Tourism, Hospitality and Event Management", c:"Health and Human Performance · campus or UF Online",
-   d:"Hotels, events, tourism and recreation businesses. Offers an Entrepreneurship certificate and an AI and Data Analytics certificate, both good fits for wanting to own a business.",
-   have:"Macroeconomics or Microeconomics",
-   needs:"Public Speaking (SPC 2608), plus Intro to Sociology (SYG 2000) or General Psychology (PSY 2012)",
-   odds:"Online looks realistic. Campus is described as limited and extremely competitive, with no published GPA target.",
-   gpa:"2.0 overall, 2.0 in prerequisites", dl:"Campus Fall: May 1 · Online: Jan 25 or Apr 26",
-   link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGHHU/TRM_BSTM/", contact:"(352) 392-0578"},
-
-  {g:2, n:"History", c:"Liberal Arts and Sciences",
-   d:"Any two history courses. UF counts at most 9 lower-level history credits toward the major.",
-   have:"Possibly AP World History, but UF's AP chart says it doesn't count toward the major",
-   needs:"Likely two history courses (US History since 1877 is one good choice)",
-   gpa:"2.5 overall", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:2, isNew:true, n:"African American Studies", c:"Liberal Arts and Sciences",
-   d:"History, politics and culture. Overlaps nicely with the suggested spring classes.",
-   have:"American Federal Government (one of three)", needs:"Two more, such as US History since 1877 and Intro to Sociology",
-   gpa:"2.5 overall, 2.5 in those courses", dl:CLAS_DL, link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGLAS/AFA_BA/", contact:CLAS_MAIL},
-
-  {g:2, n:"Political Science", c:"Liberal Arts and Sciences",
-   d:"Government, policy and political institutions. Another common pre-law route.",
-   have:"Statistics, American Federal Government",
-   needs:"Two more from: Comparative Politics (CPO 2001), International Relations (INR 2001), Political Theory (POT 2002)",
-   gpa:"2.5 overall", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:2, n:"Sociology", c:"Liberal Arts and Sciences",
-   d:"Social structures, institutions and inequality.",
-   have:"Statistics", needs:"Two sociology courses. Intro to Sociology (SYG 2000) is strongly recommended as one of them.",
-   gpa:"2.5 overall, 2.75 in sociology plus statistics", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:2, isNew:true, n:"Sustainability Studies", c:"Liberal Arts and Sciences",
-   d:"Environmental and social sustainability. A different major from Sustainability and the Built Environment.",
-   have:"Environmental Science (recommended, not required)", needs:"Two of: Social Problems (SYG 2010), Physical Geology (GLY 2010), Biology 2 (BSC 2011)",
-   gpa:"3.0 overall, 3.0 in those courses", dl:CLAS_DL, link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGLAS/SST_BA/", contact:CLAS_MAIL},
-
-  {g:2, n:"Anthropology", c:"Liberal Arts and Sciences",
-   d:"Human culture and society. Statistics counts toward the requirement.",
-   have:"Statistics", needs:"Two anthropology courses",
-   gpa:"2.5 overall", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:2, isNew:true, n:"Women's Studies", c:"Liberal Arts and Sciences",
-   d:"Gender, society and policy.",
-   have:"Nothing yet", needs:"Two Women's Studies courses, or related gender-focused courses in anthropology, English or sociology",
-   gpa:"2.5 overall, 2.5 in those courses", dl:CLAS_DL, link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGLAS/WMS_BA/", contact:CLAS_MAIL},
-
-  {g:2, isNew:true, n:"Linguistics", c:"Liberal Arts and Sciences",
-   d:"How language works, including computational and applied linguistics.",
-   have:"Nothing yet", needs:"Two linguistics courses, or two semesters of one foreign language",
-   gpa:"2.5 overall, 2.75 in those courses", dl:CLAS_DL, link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGLAS/LIN_BA/", contact:CLAS_MAIL,
-   warn:"Check whether Santa Fe offers two linguistics courses."},
-
-  {g:2, isNew:true, n:"Classical Studies", c:"Liberal Arts and Sciences",
-   d:"Greek and Roman history, literature and culture.",
-   have:"Nothing yet (AP World History 2 covers the modern era)", needs:"Two Latin, Greek, Classics or ancient-world courses",
-   gpa:"2.5 overall, 2.5 in those courses", dl:CLAS_DL, link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGLAS/CLC_BA/", contact:CLAS_MAIL},
-
-  {g:2, n:"Religion", c:"Liberal Arts and Sciences",
-   d:"Comparative study of world religions. A 30-credit major with no math or language requirement.",
-   have:"Nothing yet", needs:"Two religion courses, any level",
-   gpa:"2.5 overall", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:2, n:"Philosophy", c:"Liberal Arts and Sciences",
-   d:"Logic, ethics and reasoning. Strong preparation for law school.",
-   have:"Nothing yet", needs:"Two philosophy courses, for example Intro to Philosophy and Logic",
-   gpa:"2.5 overall", dl:CLAS_DL, link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:2, online:true, isNew:true, n:"Geology BA", c:"Liberal Arts and Sciences · campus or UF Online",
-   d:"Listed for completeness; probably not a fit.",
-   have:"Nothing yet (Astronomy and Environmental Science don't count)", needs:"Two geology or earth science courses",
-   gpa:"2.5 overall", dl:CLAS_DL + " · Online: Jan 25 or Apr 26", link:"https://ufonline.ufl.edu/degrees/undergraduate/geology/", contact:CLAS_MAIL},
-
-  /* ---------- THREE CLASSES ---------- */
-  {g:3, n:"Public Health (BPH)", c:"Public Health and Health Professions",
-   d:"Population health and health policy. The biology requirement is a general course, not a majors sequence.",
-   have:"Statistics",
-   needs:"General Biology (BSC 2005 or 2010), General Psychology (PSY 2012), and Advanced Writing (ENC 2210)",
-   gpa:"3.0 overall and 3.0 prerequisite, C or better in each",
-   dl:"Summer B: Feb 15 · Fall: May 1 · no spring",
-   link:"https://phhp.ufl.edu/admissions/applications-and-deadlines/application-information/", contact:"advising@phhp.ufl.edu",
-   warn:"Three of the four prerequisites should have final grades when you apply, so a 2027 start would be very tight."},
-
-  {g:3, online:true, isNew:true, n:"Agricultural Education and Communication", c:"Agricultural and Life Sciences · Gainesville, Plant City, or UF Online",
-   d:"The Communication and Leadership Development track leads to agribusiness communications, corporate training and HR. The Plant City campus is near Tampa.",
-   have:"College Algebra (in progress)", needs:"Biology with lab (BSC 2005/L), General Psychology (PSY 2012), Public Speaking (SPC 2608)",
-   gpa:"2.0 overall, 2.5 prerequisite", dl:"Campus: Fall May 1 · Online: Jan 25 or Apr 26",
-   link:"https://ufonline.ufl.edu/degrees/undergraduate/agricultural-education-and-communication/", contact:""},
-
-  {g:3, isNew:true, n:"Family, Youth and Community Sciences", c:"Agricultural and Life Sciences",
-   d:"Community development, nonprofit and family services.",
-   have:"Economics, Statistics", needs:"Biology with lab (BSC 2005/L), General Psychology (PSY 2012), Intro to Sociology (SYG 2000)",
-   gpa:"2.0 overall, 2.5 prerequisite", dl:"Fall: May 1 · Summer: Feb 15 (expected)",
-   link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGAGL/FYC_BS/", contact:""},
-
-  /* ---------- CALCULUS ---------- */
-  {g:4, online:true, n:"Business Administration (BSBA, UF Online)", c:"Warrington College of Business",
-   d:"The UF business degree taken online. The diploma reads University of Florida. The only business door still realistically open.",
-   have:"Macroeconomics, Microeconomics, Statistics, Computing, Financial Accounting, Managerial Accounting (finishing). Six of seven.",
-   needs:"Survey of Calculus (MAC 2233), finished before you enroll",
-   odds:"Your prerequisite GPA clears 2.5 easily. The question is calculus itself.",
-   gpa:"2.5 across the seven prerequisites", dl:ONLINE_DL,
-   link:"https://warrington.ufl.edu/undergraduate-academics/online-business-program/admissions/", contact:"admissions@warrington.ufl.edu",
-   warn:"Early (conditional) admission requires calculus already done, so with calculus in spring, Fall 2027 is the realistic term."},
-
-  {g:4, n:"Economics", c:"Liberal Arts and Sciences",
-   d:"The quantitative social science behind business, policy and finance.",
-   have:"Macroeconomics, Microeconomics, Statistics", needs:"Survey of Calculus (MAC 2233)",
-   gpa:"3.0 overall and 3.0 across those four courses; highly competitive", dl:CLAS_DL,
-   link:CLAS_LINK, contact:CLAS_MAIL},
-
-  {g:4, n:"Food and Resource Economics", c:"Agricultural and Life Sciences",
-   d:"UF's agribusiness and applied economics degree. Your accounting sequence counts, and the GPA bar is the lowest of any business-track option.",
-   have:"Financial Accounting (ACG 2001 + 2011, confirmed), Macroeconomics, Statistics", needs:"Survey of Calculus (MAC 2233)",
-   gpa:"2.0 overall and 2.0 in those courses, C or better in each", dl:"Fall: May 1 · Summer: Feb 15 (expected)",
-   link:"https://cals.ufl.edu/content/PDF/Transfer_Guide.pdf", contact:"FRE-advising@ifas.ufl.edu"},
-
-  /* ---------- RULED OUT ---------- */
-  {g:5, n:"Business Administration (BSBA, Gainesville campus)", c:"Warrington College of Business",
-   d:"Finance, Management, Marketing or Information Systems on campus.",
-   have:"Six of seven prerequisites",
-   needs:"A 3.0 GPA at each college attended. Your St. Petersburg College GPA is about 2.33.",
-   gpa:"3.0 at each school, 3.5 prerequisite", dl:"Fall: May 1",
-   link:"https://warrington.ufl.edu/admissions-aid/undergraduate-admissions/", contact:"admissions@warrington.ufl.edu",
-   warn:"This rule is new since August and closes the door regardless of calculus."},
-
-  {g:5, n:"Computer Science, Data Science, Statistics, Psychology", c:"Various colleges, campus and online",
-   d:"All need the calculus sequence, or (Psychology) precalculus plus biology at a 2.75 GPA online and about 3.5 on campus.",
-   have:"Statistics", needs:"Calculus 1 through 3 for the computing majors",
-   gpa:"Varies", dl:"Varies", link:"https://catalog.ufl.edu/UGRD/programs/", contact:CLAS_MAIL},
-
-  {g:5, n:"Nursing", c:"College of Nursing",
-   d:"Fall entry only, Feb 1 deadline, separate NursingCAS application.",
-   have:"Statistics",
-   needs:"Anatomy and Physiology 1 and 2 with labs, Microbiology with lab, plus nutrition, human development and a social science. Also the HESI A2 entrance exam.",
-   gpa:"3.0 overall and 3.0 prerequisite", dl:"Fall only",
-   link:"https://nursing.ufl.edu/programs/bachelor-of-science-bsn/traditional-bsn/", contact:"conweb@health.ufl.edu"},
-
-  {g:5, n:"Health Science and Communication Sciences and Disorders", c:"Public Health and Health Professions",
-   d:"Lab sciences required, and Health Science needs a 3.2.",
-   have:"Statistics",
-   needs:"Biology with lab, Applied Physiology with lab, psychology, and for Communication Sciences also chemistry or physics",
-   gpa:"3.2 overall for Health Science", dl:"Summer B and Fall only",
-   link:"https://phhp.ufl.edu/academics/undergraduate-programs/", contact:"advising@phhp.ufl.edu"},
-
-  {g:5, n:"Engineering, Construction Management, Geomatics", c:"Engineering · Design, Construction and Planning",
-   d:"Calculus and physics required before transferring. Construction Management's fall deadline is Mar 15.",
-   have:"Statistics and College Algebra", needs:"Calculus, physics, and for Engineering also chemistry and differential equations",
-   gpa:"Varies", dl:"Varies",
-   link:"https://catalog.ufl.edu/UGRD/colleges-schools/UGENG/", contact:"transfer@eng.ufl.edu"},
-
-  {g:5, n:"Art, Music, Dance, Digital Arts", c:"College of the Arts",
-   d:"Portfolio or audition gated.",
-   have:"Not applicable",
-   needs:"Studio Art and Graphic Design need a portfolio. Music requires an audition and theory exam. Dance requires an audition. Digital Arts and Sciences BA requires a portfolio and admits fall only.",
-   gpa:"3.0 for most", dl:"Varies by school",
-   link:"https://arts.ufl.edu/", contact:"saahadvising@arts.ufl.edu",
-   warn:"Theatre BA (including a Theatre Management track) may not require an audition; its transfer page couldn't be checked."}
-];
-
-const list = document.getElementById('list');
-const contactHtml = c => !c ? '' : c.includes('@') ? `<a href="mailto:${c}">${c}</a>` : `<span>${c}</span>`;
-GROUPS.forEach(grp=>{
-  const items = MAJORS.filter(m=>m.g===grp.g);
-  if(!items.length) return;
-  list.insertAdjacentHTML('beforeend',
-    `<div class="grouphd"><h3>${grp.h}</h3><span class="cnt">${items.length} option${items.length>1?'s':''}</span></div>
-     <p class="groupnote">${grp.note}</p>`);
-  items.forEach(m=>{
-    list.insertAdjacentHTML('beforeend',`
-      <div class="card g${m.g}">
-        <div class="ctop">
-          <div>
-            <p class="cname">${m.star?'★ ':''}${m.n}</p>
-            <p class="ccol">${m.c}</p>
-          </div>
-          <div class="pills">
-            ${m.isNew?'<span class="pill p-new">NEW</span>':''}
-            ${m.online?'<span class="pill p-online">UF ONLINE</span>':''}
-            <span class="pill ${grp.pc}">${grp.pill}</span>
-          </div>
-        </div>
-        <p class="desc">${m.d}</p>
-        ${m.odds?`<p class="oddsbox"><b>Your odds:</b> ${m.odds}</p>`:''}
-        ${m.needs?`<div class="needbox"><b>${m.g===5?'Blocked by':'Still need'}:</b> ${m.needs}</div>`:''}
-        <p class="havebox"><b>✓ You already have:</b> ${m.have}</p>
-        ${m.warn?`<p class="desc" style="color:var(--amber)"><b>Note:</b> ${m.warn}</p>`:''}
-        <div class="meta">
-          <span><b>GPA:</b> ${m.gpa}</span>
-          <span><b>Deadline:</b> ${m.dl}</span>
-          <a href="${m.link}" target="_blank" rel="noopener">Official page ↗</a>
-          ${contactHtml(m.contact)}
-        </div>
-      </div>`);
-  });
-});
-document.getElementById('readyCount').textContent = MAJORS.filter(m=>m.g===0).length;
-
-/* tabs */
-document.querySelector('nav.tabs').addEventListener('click',e=>{
-  const t=e.target.dataset.tab; if(!t) return;
-  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
-  document.querySelectorAll('section.panel').forEach(p=>p.classList.toggle('on',p.id===t));
-  window.scrollTo({top:0,behavior:'smooth'});
-});
-
-/* timeline */
-const TL=[
-  ["Done","AA graduation application on file, status Eligible.","done"],
-  ["November 2026","Register for spring. Registration is open now.","key"],
-  ["Dec 7 to 12, 2026","Fall finals. These grades set your GPA for every application.",""],
-  ["December 2026","AA degree posts. Florida AA graduates get transfer priority at UF.","key"],
-  ["Jan 25, 2027","UF Online Summer 2027 application deadline (Sport Management, Criminology, Tourism, journalism and Education Sciences online).","online"],
-  ["Feb 1, 2027","Urban Sciences and Planning, Summer 2027 deadline. Earliest campus start.","key"],
-  ["Feb 15, 2027","General UF campus summer deadline (expected). Public Health Summer B.",""],
-  ["Feb 22, 2027","UF Online summer file must be complete.","online"],
-  ["Mar 1, 2027","Campus summer materials due (expected).",""],
-  ["Apr 1, 2027","Campus summer decisions by this date (expected).",""],
-  ["Apr 26, 2027","UF Online Fall 2027 application deadline.","online"],
-  ["May 1, 2027","Main UF campus fall deadline (expected). Applies to almost every campus major here.","key"],
-  ["May 10, 2027","Summer A/C classes start.",""],
-  ["May 15, 2027","Campus fall materials due (expected).",""],
-  ["May 24, 2027","UF Online fall file must be complete.","online"],
-  ["Jun 15, 2027","Campus fall decisions by this date (many come earlier).",""],
-  ["Aug 19, 2027","UF fall classes start.","key"]
-];
-const tl=document.getElementById('tl');
-TL.forEach(([d,t,k])=>{
-  tl.insertAdjacentHTML('beforeend',
-    `<div class="ev ${k}"><div class="d">${d}</div><div class="t">${t}</div></div>`);
-});
-</script>
 </body>
 </html>
